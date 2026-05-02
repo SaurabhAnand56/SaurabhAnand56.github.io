@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Netflix EDA Dashboard — Saurabh</title>
+  <meta name="description" content="A full Netflix content analysis project — EDA with Python, interactive Power BI dashboard, and a Streamlit web app with content recommendations." />
+  <link rel="icon" type="image/png" href="assets/photo1.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="../../css/post.css" />
+  <script>(function(){const t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();</script>
+</head>
+<body>
+
+<nav class="top-nav" id="top-nav">
+  <div class="wrap nav-row">
+    <a href="../../index.html" class="nav-logo" title="Home" aria-label="Home">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+    </a>
+    <button class="nav-btn nav-theme-mobile" onclick="toggleTheme()" title="Toggle theme"><span class="theme-icon"></span></button>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false"><span></span></button>
+    <div class="nav-right">
+      <a href="../blog.html" class="nav-link active">Blog</a>
+      <a href="../../index.html#projects" class="nav-link">Projects</a>
+      <a href="../../index.html#contact" class="nav-link">Contact</a>
+      <a href="../cli.html" class="nav-link" style="font-family:var(--f-mono);font-size:12px">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="m8 5-1.5 1.5L11 11l-4.5 4.5L8 17l6-6z"/><path d="M13 15h6v2h-6z"/></svg>CLI
+      </a>
+      <button class="nav-search-btn" data-search-trigger title="Search (⌘K)">
+        <svg viewBox="0 0 24 24"><path d="M21 21l-4.35-4.35M16.65 16.65A7.5 7.5 0 1 0 2 9.5a7.5 7.5 0 0 0 14.65 7.15z" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+        Search <span class="nav-search-kbd">⌘K</span>
+      </button>
+      <button class="nav-btn" onclick="toggleTheme()" title="Toggle theme"><span class="theme-icon"></span></button>
+    </div>
+  </div>
+  <div class="mobile-nav-panel" id="mobile-nav-panel" aria-hidden="true">
+    <a href="../blog.html" class="nav-link active">Blog</a>
+    <a href="../../index.html#projects" class="nav-link">Projects</a>
+    <a href="../../index.html#contact" class="nav-link">Contact</a>
+    <a href="../cli.html" class="nav-link" style="font-family:var(--f-mono);font-size:12px">CLI</a>
+    <button class="nav-search-btn" data-search-trigger>Search <span class="nav-search-kbd">⌘K</span></button>
+  </div>
+</nav>
+
+<main class="post-main">
+  <div class="post-wrap">
+
+    <a href="../blog.html" class="post-back">
+      <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+      Back to Blog
+    </a>
+
+    <header class="post-header">
+      <span class="post-cat">Projects</span>
+      <h1 class="post-title">Building the Netflix EDA Dashboard — Python, Power BI & Streamlit</h1>
+      <div class="post-meta">
+        <span>May 2, 2026</span>
+        <span class="post-meta-dot">·</span>
+        <span>8 min read</span>
+        <span class="post-meta-dot">·</span>
+        <span>Saurabh</span>
+      </div>
+    </header>
+
+    <article class="post-body">
+
+      <p>Netflix has over 8,000 titles across movies and TV shows. That dataset — publicly available on Kaggle — is a goldmine for understanding content trends, genre distributions, global production patterns, and rating structures. This project took that raw data through three complete analytical layers: a Jupyter notebook for EDA, a Power BI dashboard for business reporting, and a Streamlit web app for interactive exploration and content recommendations.</p>
+
+      <!-- Live links callout -->
+      <blockquote>
+        <p>
+          🔗 <strong>Live Streamlit App:</strong> <a href="https://bit.ly/4e6y6Tt" target="_blank" rel="noopener">bit.ly/4e6y6Tt</a><br/>
+          📂 <strong>GitHub Repository:</strong> <a href="https://github.com/SaurabhAnand56/Netflix-EDA-PowerBI" target="_blank" rel="noopener">github.com/SaurabhAnand56/Netflix-EDA-PowerBI</a>
+        </p>
+      </blockquote>
+
+      <h2>Why Netflix Data?</h2>
+      <p>Most beginner data projects use the Titanic or Iris datasets. Both are fine for learning mechanics, but neither reflects the kind of messy, real-world data you actually encounter. The Netflix dataset has missing values, inconsistent formatting, multi-value columns (genres, cast, directors stored as comma-separated strings), and interesting temporal patterns. It forces you to think carefully about cleaning strategy before you touch a single visualization.</p>
+      <p>It also has an obvious business framing: what kind of content does Netflix produce? Where is it produced? How has the content mix shifted over time? Those are real questions a streaming analyst would actually answer.</p>
+
+      <h2>The Dataset</h2>
+      <p>The dataset contains <strong>8,807 titles</strong> with 12 columns: show_id, type, title, director, cast, country, date_added, release_year, rating, duration, listed_in (genres), and description. It covers content through 2021.</p>
+      <p>Key data quality issues encountered:</p>
+      <ul>
+        <li>~30% of director values missing — handled by filling with <code>"Unknown"</code> rather than dropping rows</li>
+        <li>Cast and genre columns are pipe-separated strings — required <code>explode()</code> after splitting to analyze at the individual actor/genre level</li>
+        <li>Date formats inconsistent — standardized with <code>pd.to_datetime()</code> with error coercion</li>
+        <li>Duration stored as strings like <code>"90 min"</code> and <code>"2 Seasons"</code> — split into numeric value + unit columns</li>
+      </ul>
+
+      <h2>Part 1 — Exploratory Data Analysis</h2>
+      <p>The EDA notebook followed a structured flow: univariate analysis of each column, bivariate relationships between content type and other features, temporal analysis of content addition trends, and geographic analysis of production countries.</p>
+
+      <pre><code>import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+df = pd.read_csv("netflix_titles.csv")
+
+# Clean date_added
+df['date_added'] = pd.to_datetime(df['date_added'].str.strip(), errors='coerce')
+df['year_added'] = df['date_added'].dt.year
+df['month_added'] = df['date_added'].dt.month
+
+# Explode genres for frequency analysis
+df['genres'] = df['listed_in'].str.split(', ')
+genre_df = df.explode('genres')
+top_genres = genre_df['genres'].value_counts().head(15)
+
+# Content type split over years
+type_year = df.groupby(['year_added', 'type']).size().unstack(fill_value=0)
+type_year.plot(kind='bar', stacked=True, figsize=(14, 6), colormap='Set2')
+plt.title('Netflix Content Added by Year and Type')
+plt.tight_layout()
+plt.savefig('charts/content_by_year.png', dpi=150)</code></pre>
+
+      <p>Key findings from the EDA: Movies make up about 69% of the catalogue. The US is the top producing country by a large margin, followed by India and the UK. Content additions peaked sharply in 2019–2020 and dropped slightly post-pandemic. International Movies and Dramas are the dominant genres, with TV Dramas growing fastest year-over-year.</p>
+
+      <h2>Part 2 — Power BI Dashboard</h2>
+      <p>The Power BI layer translated the EDA findings into an executive-facing dashboard — the kind of thing a content strategy team would actually use. The design philosophy was one-page-per-theme: an overview page, a content deep-dive, a geographic view, and a ratings breakdown.</p>
+      <p>The trickiest part of the Power BI work was handling the multi-value columns. Power BI doesn't natively handle comma-separated strings, so the genre and country columns were pre-processed in Python to produce a separate <code>genre_mapping.csv</code> and <code>country_mapping.csv</code> that Power BI could join against the main table using a many-to-many relationship via show_id.</p>
+      <p>DAX measures used across the dashboard included content count by type, average duration filtered by type (since mixing movie minutes and TV seasons in the same average makes no sense), year-over-year growth rate, and a rolling 12-month content addition count for the trend line.</p>
+
+      <h2>Part 3 — Streamlit Web App</h2>
+      <p>The Streamlit app is the most user-facing layer. It exposes the same analysis interactively — users can filter by content type, genre, country, and rating, and the charts update in real time. The most interesting feature is a simple content-based recommendation engine built on top of TF-IDF similarity across the description column.</p>
+
+      <pre><code>from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
+
+# Build TF-IDF matrix on descriptions
+tfidf = TfidfVectorizer(stop_words='english', max_features=5000)
+tfidf_matrix = tfidf.fit_transform(df['description'].fillna(''))
+
+# Cosine similarity matrix
+cosine_sim = cosine_similarity(tfidf_matrix, tfidf_matrix)
+
+def recommend(title, n=5):
+    idx = df[df['title'] == title].index[0]
+    sim_scores = sorted(enumerate(cosine_sim[idx]), key=lambda x: x[1], reverse=True)[1:n+1]
+    indices = [i[0] for i in sim_scores]
+    return df[['title', 'type', 'listed_in', 'description']].iloc[indices]</code></pre>
+
+      <p>The recommendation quality is decent for a TF-IDF baseline — it surfaces thematically similar content reliably — but it misses stylistic similarity that a more sophisticated embedding-based approach would catch. That's a natural next iteration.</p>
+
+      <h2>What I Learned</h2>
+      <p>Data cleaning takes longer than analysis, every time. The Power BI many-to-many relationship for multi-value columns is a pattern I'll reuse constantly. And Streamlit is genuinely fast for turning Python analysis into something shareable — the entire app was built in under two days.</p>
+      <p>The project also reinforced that the most valuable output of any analysis isn't a chart — it's a clear answer to a business question. Every visualization in the dashboard was designed backwards from a specific question, not forwards from "what can I plot?"</p>
+
+    </article>
+
+      <!-- READ NEXT -->
+    <section class="read-next">
+      <p class="read-next-label">Read next</p>
+      <div class="read-next-grid">
+        <!-- Previous Project -->
+        <a href="ai-sql-business-intelligence.html" class="read-next-card prev">
+          <span class="read-next-card-dir">
+            <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+            Previous
+          </span>
+          <span class="read-next-card-title">Building an AI-Powered SQL Business Intelligence</span>
+          <span class="read-next-card-cat">Projects</span>
+        </a>
+        
+      </div>
+    </section>
+
+    <div class="post-footer">
+      <a href="../blog.html" class="post-back">
+        <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+        Back to Blog
+      </a>
+    </div>
+
+  </div>
+</main>
+
+<nav class="dock" id="bottom-dock">
+  <button class="dock-btn" onclick="window.location.href='../../index.html'" title="Home">
+    <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+  </button>
+  <button class="dock-btn on" onclick="window.location.href='../blog.html'" title="Blog">
+    <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+  </button>
+  <button class="dock-btn" onclick="window.location.href='../../index.html#projects'" title="Projects">
+    <svg viewBox="0 0 24 24"><path d="M3 3h8v8H3zm10 0h8v8h-8zM3 13h8v8H3zm10 0h8v8h-8z"/></svg>
+  </button>
+  <div class="dock-sep"></div>
+  <button class="dock-btn" onclick="window.location.href='../cli.html'" title="CLI Mode">
+    <svg viewBox="0 0 24 24"><path d="m8 5-1.5 1.5L11 11l-4.5 4.5L8 17l6-6zm5 10h6v2h-6z"/></svg>
+  </button>
+  <button class="dock-btn" onclick="toggleTheme()" title="Toggle theme"><span class="theme-icon"></span></button>
+</nav>
+
+<button class="search-float-btn" data-search-trigger title="Search (⌘K)">
+  <svg viewBox="0 0 24 24"><path d="M21 21l-4.35-4.35M16.65 16.65A7.5 7.5 0 1 0 2 9.5a7.5 7.5 0 0 0 14.65 7.15z" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+  Search <span class="search-inp-kbd">⌘K</span>
+</button>
+
+<div class="search-overlay" id="search-overlay">
+  <div class="search-box">
+    <div class="search-input-row">
+      <svg viewBox="0 0 24 24"><path d="M21 21l-4.35-4.35M16.65 16.65A7.5 7.5 0 1 0 2 9.5a7.5 7.5 0 0 0 14.65 7.15z" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+      <input id="search-inp" class="search-inp" type="text" placeholder="Type a command or search..." autocomplete="off" spellcheck="false" />
+      <button class="search-close-btn" type="button" aria-label="Close search">×</button>
+      <span class="search-inp-kbd">ESC</span>
+    </div>
+    <div class="search-results" id="search-results"></div>
+    <div class="search-footer">
+      <span class="search-footer-kbd">↑↓</span> navigate &nbsp;
+      <span class="search-footer-kbd">↵</span> select &nbsp;
+      <span class="search-footer-kbd">ESC</span> close
+    </div>
+  </div>
+</div>
+
+<script src="../../js/main.js"></script>
+</body>
+</html>

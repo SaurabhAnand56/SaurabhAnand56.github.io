@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 420" font-family="monospace">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f0f13"/>
+      <stop offset="100%" style="stop-color:#0d1a2e"/>
+    </linearGradient>
+    <linearGradient id="bar1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#7f5af0"/>
+      <stop offset="100%" style="stop-color:#7f5af055"/>
+    </linearGradient>
+    <linearGradient id="bar2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#2cb67d"/>
+      <stop offset="100%" style="stop-color:#2cb67d55"/>
+    </linearGradient>
+    <linearGradient id="bar3" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#f7c948"/>
+      <stop offset="100%" style="stop-color:#f7c94855"/>
+    </linearGradient>
+    <linearGradient id="line-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#7f5af0"/>
+      <stop offset="100%" style="stop-color:#2cb67d"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="420" fill="url(#bg)"/>
+
+  <!-- Grid lines -->
+  <line x1="60" y1="60" x2="60" y2="320" stroke="#ffffff" stroke-width="0.5" opacity="0.08"/>
+  <line x1="60" y1="320" x2="560" y2="320" stroke="#ffffff" stroke-width="0.5" opacity="0.08"/>
+  <line x1="60" y1="240" x2="560" y2="240" stroke="#ffffff" stroke-width="0.5" opacity="0.06" stroke-dasharray="4,4"/>
+  <line x1="60" y1="160" x2="560" y2="160" stroke="#ffffff" stroke-width="0.5" opacity="0.06" stroke-dasharray="4,4"/>
+  <line x1="60" y1="80" x2="560" y2="80" stroke="#ffffff" stroke-width="0.5" opacity="0.06" stroke-dasharray="4,4"/>
+
+  <!-- Y axis labels -->
+  <text x="48" y="324" fill="#ffffff" font-size="9" text-anchor="end" opacity="0.3">0</text>
+  <text x="48" y="244" fill="#ffffff" font-size="9" text-anchor="end" opacity="0.3">25</text>
+  <text x="48" y="164" fill="#ffffff" font-size="9" text-anchor="end" opacity="0.3">50</text>
+  <text x="48" y="84" fill="#ffffff" font-size="9" text-anchor="end" opacity="0.3">75</text>
+
+  <!-- Bars: Traditional Analytics -->
+  <rect x="76" y="200" width="28" height="120" rx="4" fill="url(#bar1)" opacity="0.7"/>
+  <rect x="156" y="180" width="28" height="140" rx="4" fill="url(#bar1)" opacity="0.7"/>
+  <rect x="236" y="160" width="28" height="160" rx="4" fill="url(#bar1)" opacity="0.7"/>
+  <rect x="316" y="140" width="28" height="180" rx="4" fill="url(#bar1)" opacity="0.7"/>
+  <rect x="396" y="120" width="28" height="200" rx="4" fill="url(#bar1)" opacity="0.7"/>
+  <rect x="476" y="100" width="28" height="220" rx="4" fill="url(#bar1)" opacity="0.7"/>
+
+  <!-- Bars: AI-powered Analytics -->
+  <rect x="108" y="260" width="28" height="60" rx="4" fill="url(#bar2)" opacity="0.7"/>
+  <rect x="188" y="220" width="28" height="100" rx="4" fill="url(#bar2)" opacity="0.7"/>
+  <rect x="268" y="170" width="28" height="150" rx="4" fill="url(#bar2)" opacity="0.7"/>
+  <rect x="348" y="110" width="28" height="210" rx="4" fill="url(#bar2)" opacity="0.7"/>
+  <rect x="428" y="80" width="28" height="240" rx="4" fill="url(#bar2)" opacity="0.85"/>
+  <rect x="508" y="65" width="28" height="255" rx="4" fill="url(#bar2)" opacity="0.9"/>
+
+  <!-- Trend line -->
+  <polyline points="122,280 202,240 282,190 362,130 442,100 522,82"
+    fill="none" stroke="url(#line-grad)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
+  <!-- Dots on trend line -->
+  <circle cx="122" cy="280" r="4" fill="#7f5af0"/>
+  <circle cx="202" cy="240" r="4" fill="#9b7bf4"/>
+  <circle cx="282" cy="190" r="4" fill="#b8a0f7"/>
+  <circle cx="362" cy="130" r="4" fill="#2cb67d" opacity="0.9"/>
+  <circle cx="442" cy="100" r="5" fill="#2cb67d"/>
+  <circle cx="522" cy="82" r="5" fill="#2cb67d"/>
+
+  <!-- X axis labels -->
+  <text x="90" y="338" fill="#ffffff" font-size="9" text-anchor="middle" opacity="0.35">2019</text>
+  <text x="170" y="338" fill="#ffffff" font-size="9" text-anchor="middle" opacity="0.35">2020</text>
+  <text x="250" y="338" fill="#ffffff" font-size="9" text-anchor="middle" opacity="0.35">2021</text>
+  <text x="330" y="338" fill="#ffffff" font-size="9" text-anchor="middle" opacity="0.35">2022</text>
+  <text x="410" y="338" fill="#ffffff" font-size="9" text-anchor="middle" opacity="0.35">2023</text>
+  <text x="490" y="338" fill="#ffffff" font-size="9" text-anchor="middle" opacity="0.35">2024</text>
+
+  <!-- Legend -->
+  <rect x="60" y="358" width="10" height="10" rx="2" fill="#7f5af0" opacity="0.8"/>
+  <text x="76" y="368" fill="#ffffff" font-size="10" opacity="0.5">Traditional Analytics</text>
+  <rect x="210" y="358" width="10" height="10" rx="2" fill="#2cb67d" opacity="0.8"/>
+  <text x="226" y="368" fill="#ffffff" font-size="10" opacity="0.5">AI-Powered Analytics</text>
+  <rect x="370" y="358" width="10" height="10" rx="2" fill="#f7c948" opacity="0.8"/>
+
+  <!-- Right panel: stat cards -->
+  <rect x="590" y="55" width="170" height="70" rx="10" fill="#ffffff" opacity="0.04" stroke="#ffffff" stroke-width="0.5" stroke-opacity="0.08"/>
+  <text x="606" y="80" fill="#2cb67d" font-size="22" font-weight="bold" font-family="sans-serif">142%</text>
+  <text x="606" y="97" fill="#ffffff" font-size="10" opacity="0.4">Growth in real-time</text>
+  <text x="606" y="110" fill="#ffffff" font-size="10" opacity="0.4">analytics adoption</text>
+
+  <rect x="590" y="140" width="170" height="70" rx="10" fill="#ffffff" opacity="0.04" stroke="#ffffff" stroke-width="0.5" stroke-opacity="0.08"/>
+  <text x="606" y="165" fill="#7f5af0" font-size="22" font-weight="bold" font-family="sans-serif">3.2B</text>
+  <text x="606" y="182" fill="#ffffff" font-size="10" opacity="0.4">Data points processed</text>
+  <text x="606" y="195" fill="#ffffff" font-size="10" opacity="0.4">per second globally</text>
+
+  <rect x="590" y="225" width="170" height="70" rx="10" fill="#ffffff" opacity="0.04" stroke="#ffffff" stroke-width="0.5" stroke-opacity="0.08"/>
+  <text x="606" y="250" fill="#f7c948" font-size="22" font-weight="bold" font-family="sans-serif">68%</text>
+  <text x="606" y="267" fill="#ffffff" font-size="10" opacity="0.4">Orgs using ML in</text>
+  <text x="606" y="280" fill="#ffffff" font-size="10" opacity="0.4">analytics pipelines</text>
+
+  <!-- Title -->
+  <text x="60" y="40" fill="#ffffff" font-size="13" font-weight="bold" font-family="sans-serif" opacity="0.7" letter-spacing="-0.3">Data Analytics Growth: Traditional vs AI-Powered</text>
+
+  <!-- Bottom bar -->
+  <rect x="0" y="400" width="800" height="20" fill="#ffffff" opacity="0.02"/>
+  <text x="400" y="414" fill="#ffffff" font-size="9" text-anchor="middle" opacity="0.2" letter-spacing="1">THE FUTURE OF DATA ANALYTICS — SAURABH.DEV</text>
+</svg>

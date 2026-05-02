@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI-Powered SQL Business Intelligence Assistant — Saurabh</title>
+  <meta name="description" content="How I built an app that converts plain English questions into SQL queries using Gemini AI, runs them against a Superstore database, and returns charts and business insights automatically." />
+  <link rel="icon" type="image/png" href="assets/photo1.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="../../css/post.css" />
+  <script>(function(){const t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();</script>
+</head>
+<body>
+
+<nav class="top-nav" id="top-nav">
+  <div class="wrap nav-row">
+    <a href="../../index.html" class="nav-logo" title="Home" aria-label="Home">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+    </a>
+    <button class="nav-btn nav-theme-mobile" onclick="toggleTheme()" title="Toggle theme"><span class="theme-icon"></span></button>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false"><span></span></button>
+    <div class="nav-right">
+      <a href="../blog.html" class="nav-link active">Blog</a>
+      <a href="../../index.html#projects" class="nav-link">Projects</a>
+      <a href="../../index.html#contact" class="nav-link">Contact</a>
+      <a href="../cli.html" class="nav-link" style="font-family:var(--f-mono);font-size:12px">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="m8 5-1.5 1.5L11 11l-4.5 4.5L8 17l6-6z"/><path d="M13 15h6v2h-6z"/></svg>CLI
+      </a>
+      <button class="nav-search-btn" data-search-trigger title="Search (⌘K)">
+        <svg viewBox="0 0 24 24"><path d="M21 21l-4.35-4.35M16.65 16.65A7.5 7.5 0 1 0 2 9.5a7.5 7.5 0 0 0 14.65 7.15z" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+        Search <span class="nav-search-kbd">⌘K</span>
+      </button>
+      <button class="nav-btn" onclick="toggleTheme()" title="Toggle theme"><span class="theme-icon"></span></button>
+    </div>
+  </div>
+  <div class="mobile-nav-panel" id="mobile-nav-panel" aria-hidden="true">
+    <a href="../blog.html" class="nav-link active">Blog</a>
+    <a href="../../index.html#projects" class="nav-link">Projects</a>
+    <a href="../../index.html#contact" class="nav-link">Contact</a>
+    <a href="../cli.html" class="nav-link" style="font-family:var(--f-mono);font-size:12px">CLI</a>
+    <button class="nav-search-btn" data-search-trigger>Search <span class="nav-search-kbd">⌘K</span></button>
+  </div>
+</nav>
+
+<main class="post-main">
+  <div class="post-wrap">
+
+    <a href="../blog.html" class="post-back">
+      <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+      Back to Blog
+    </a>
+
+    <header class="post-header">
+      <span class="post-cat">Projects</span>
+      <h1 class="post-title">Building an AI-Powered SQL Business Intelligence Assistant with Gemini</h1>
+      <div class="post-meta">
+        <span>Apr 27, 2026</span>
+        <span class="post-meta-dot">·</span>
+        <span>9 min read</span>
+        <span class="post-meta-dot">·</span>
+        <span>Saurabh</span>
+      </div>
+    </header>
+
+    <article class="post-body">
+
+      <p>The core problem with business intelligence tools has always been the same: the people who need the answers can't write SQL, and the people who can write SQL are busy with other things. This project is my attempt to close that gap — a Streamlit app where you type a question in plain English, Gemini AI generates the SQL, the app runs it against a real database, and you get back a table, a chart, and a plain-English business insight. No SQL knowledge required.</p>
+
+      <blockquote>
+        <p>
+          🔗 <strong>Live Streamlit App:</strong> <a href="https://bit.ly/4cUtPwB" target="_blank" rel="noopener">bit.ly/4cUtPwB</a><br/>
+          📂 <strong>GitHub Repository:</strong> <a href="https://bit.ly/42df5sT" target="_blank" rel="noopener">bit.ly/42df5sT</a>
+        </p>
+      </blockquote>
+
+      <h2>The Dataset</h2>
+      <p>The app runs against the Superstore Sales dataset — 9,994 orders from 2020–2023 across 16 columns including order details, shipping mode, customer segment, region, product category, sales, quantity, discount, and profit. It's the standard BI benchmark dataset for a reason: it's rich enough to support complex queries but clean enough that data quality doesn't obscure the analytical patterns.</p>
+      <p>Rather than connecting to a cloud database (which would require credentials and network setup for every user), the dataset is loaded into a local SQLite database at startup. SQLite's full SQL support — including window functions, CTEs, and aggregations — makes it perfectly adequate for this use case, and the app starts in under two seconds on any machine.</p>
+
+      <h2>The Architecture</h2>
+      <p>The flow for every query is five steps:</p>
+      <ul>
+        <li><strong>User types a question</strong> in plain English — e.g. "Which region has the highest profit margin?"</li>
+        <li><strong>The question + database schema</strong> are sent to Gemini 2.5 Flash as a structured prompt</li>
+        <li><strong>Gemini returns valid SQL</strong> which the app extracts and sanitizes</li>
+        <li><strong>The SQL runs against SQLite</strong> — results returned as a Pandas DataFrame</li>
+        <li><strong>The DataFrame + original question</strong> go back to Gemini for a plain-English business insight</li>
+      </ul>
+      <p>The two-call pattern — one for SQL generation, one for insight generation — is deliberate. Combining them into a single prompt degrades both outputs. Separating them lets each call be optimized independently.</p>
+
+      <h2>The Prompt Engineering</h2>
+      <p>Getting Gemini to reliably generate correct, safe SQL requires careful prompt construction. The system prompt includes the full schema with column descriptions, explicit instructions to use only SELECT statements, examples of complex queries (CTEs, window functions), and a formatting directive to return only the SQL with no explanation.</p>
+
+      <pre><code>def build_sql_prompt(user_question: str, schema: str) -> str:
+    return f"""You are an expert SQL analyst working with a SQLite database.
+
+Database Schema:
+{schema}
+
+Rules:
+- Generate ONLY a SELECT statement. No INSERT, UPDATE, DELETE, DROP.
+- Use SQLite-compatible syntax only.
+- Return ONLY the SQL query, no explanation, no markdown fences.
+- Use appropriate aggregations, JOINs, and window functions as needed.
+- Column names are case-sensitive — use them exactly as shown in the schema.
+
+Question: {user_question}
+
+SQL Query:"""</code></pre>
+
+      <p>The schema string is generated dynamically from the live database using <code>PRAGMA table_info()</code>, which means the prompt stays accurate even if the underlying table changes — an important robustness property for any app someone else might deploy with their own database.</p>
+
+      <h2>SQL Safety</h2>
+      <p>Even with the prompt instructing SELECT-only, LLMs can occasionally produce unexpected output. The app adds a hard validation layer on top of the prompt-level guardrail:</p>
+
+      <pre><code>import re
+import sqlite3
+
+FORBIDDEN = ['insert', 'update', 'delete', 'drop', 'alter', 'create', 'truncate']
+
+def validate_and_run(sql: str, conn: sqlite3.Connection) -> pd.DataFrame:
+    sql_lower = sql.lower().strip()
+
+    # Must start with SELECT
+    if not sql_lower.startswith('select'):
+        raise ValueError("Only SELECT queries are permitted.")
+
+    # No data-modification keywords anywhere in the query
+    for keyword in FORBIDDEN:
+        if re.search(rf'\b{keyword}\b', sql_lower):
+            raise ValueError(f"Forbidden keyword detected: {keyword}")
+
+    return pd.read_sql_query(sql, conn)</code></pre>
+
+      <p>Two layers — prompt-level and code-level — gives much higher confidence than either alone. The prompt prevents most bad outputs. The code-level check catches anything that slips through.</p>
+
+      <h2>The Four App Pages</h2>
+      <p>The app is structured across four Streamlit pages. <strong>Home</strong> shows key metrics and a quick query launcher. <strong>AI Query Assistant</strong> is the main NL-to-SQL interface. <strong>Sales Dashboard</strong> has pre-built interactive charts with region and category filters. <strong>SQL Explorer</strong> lets users write and run their own SQL directly. There's also an <strong>AI Insights</strong> page that generates a full business intelligence report on demand.</p>
+
+      <h2>The SQL Window Functions</h2>
+      <p>One of the things that makes this project technically interesting is that Gemini reliably generates complex SQL when the schema context is good. Here are examples of queries it produces correctly from natural language:</p>
+
+      <pre><code>-- "Show year-over-year revenue growth"
+SELECT
+  STRFTIME('%Y', order_date) AS year,
+  ROUND(SUM(sales), 2) AS total_sales,
+  COUNT(DISTINCT order_id) AS orders
+FROM sales GROUP BY year ORDER BY year;
+
+-- "Profit margin by category"
+SELECT category,
+  ROUND(SUM(profit) / SUM(sales) * 100, 2) AS margin_pct
+FROM sales GROUP BY category;
+
+-- "Running total of sales by order date"
+SELECT order_date, sales,
+  SUM(sales) OVER (ORDER BY order_date) AS running_total
+FROM sales ORDER BY order_date;</code></pre>
+
+      <h2>What I'd Do Differently</h2>
+      <p>The current implementation re-sends the full schema with every API call, which is wasteful for a large schema. A production version would cache a schema embedding and do retrieval-augmented generation to include only the relevant tables. The insight generation prompt also needs more structure — right now it produces variable-length outputs, and for a BI context you want a consistent format: one headline number, one trend observation, one recommended action.</p>
+      <p>That said, for the scope of this project the app works reliably and handles a wide range of real analytical questions correctly. It's a solid proof of concept for what AI-augmented BI tooling looks like at the small-team scale.</p>
+
+    </article>
+
+  <!-- READ NEXT -->
+    <section class="read-next">
+      <p class="read-next-label">Read next</p>
+      <div class="read-next-grid">
+        <!-- Previous Project -->
+        <a href="student-lifestyle-analysis.html" class="read-next-card prev">
+          <span class="read-next-card-dir">
+            <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+            Previous
+          </span>
+          <span class="read-next-card-title">Student Lifestyle & Academic Performance Analysis</span>
+          <span class="read-next-card-cat">Projects</span>
+        </a>
+        <!-- Next Project -->
+        <a href="netflix-eda-powerbi.html" class="read-next-card next">
+          <span class="read-next-card-dir">
+            Next
+            <svg viewBox="0 0 24 24"><path d="M4 13h12.17l-5.59 5.59L12 20l8-8-8-8-1.41 1.41L16.17 11H4v2z"/></svg>
+          </span>
+          <span class="read-next-card-title">Building the Netflix EDA Dashboard</span>
+          <span class="read-next-card-cat">Projects</span>
+        </a>
+      </div>
+    </section>
+
+    <div class="post-footer">
+      <a href="../blog.html" class="post-back">
+        <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+        Back to Blog
+      </a>
+    </div>
+
+  </div>
+</main>
+
+<nav class="dock" id="bottom-dock">
+  <button class="dock-btn" onclick="window.location.href='../../index.html'" title="Home">
+    <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+  </button>
+  <button class="dock-btn on" onclick="window.location.href='../blog.html'" title="Blog">
+    <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+  </button>
+  <button class="dock-btn" onclick="window.location.href='../../index.html#projects'" title="Projects">
+    <svg viewBox="0 0 24 24"><path d="M3 3h8v8H3zm10 0h8v8h-8zM3 13h8v8H3zm10 0h8v8h-8z"/></svg>
+  </button>
+  <div class="dock-sep"></div>
+  <button class="dock-btn" onclick="window.location.href='../cli.html'" title="CLI Mode">
+    <svg viewBox="0 0 24 24"><path d="m8 5-1.5 1.5L11 11l-4.5 4.5L8 17l6-6zm5 10h6v2h-6z"/></svg>
+  </button>
+  <button class="dock-btn" onclick="toggleTheme()" title="Toggle theme"><span class="theme-icon"></span></button>
+</nav>
+
+<button class="search-float-btn" data-search-trigger title="Search (⌘K)">
+  <svg viewBox="0 0 24 24"><path d="M21 21l-4.35-4.35M16.65 16.65A7.5 7.5 0 1 0 2 9.5a7.5 7.5 0 0 0 14.65 7.15z" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+  Search <span class="search-inp-kbd">⌘K</span>
+</button>
+
+<div class="search-overlay" id="search-overlay">
+  <div class="search-box">
+    <div class="search-input-row">
+      <svg viewBox="0 0 24 24"><path d="M21 21l-4.35-4.35M16.65 16.65A7.5 7.5 0 1 0 2 9.5a7.5 7.5 0 0 0 14.65 7.15z" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+      <input id="search-inp" class="search-inp" type="text" placeholder="Type a command or search..." autocomplete="off" spellcheck="false" />
+      <button class="search-close-btn" type="button" aria-label="Close search">×</button>
+      <span class="search-inp-kbd">ESC</span>
+    </div>
+    <div class="search-results" id="search-results"></div>
+    <div class="search-footer">
+      <span class="search-footer-kbd">↑↓</span> navigate &nbsp;
+      <span class="search-footer-kbd">↵</span> select &nbsp;
+      <span class="search-footer-kbd">ESC</span> close
+    </div>
+  </div>
+</div>
+
+<script src="../../js/main.js"></script>
+</body>
+</html>

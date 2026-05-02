@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Revenue Leakage Detection & Pricing Optimization — Saurabh</title>
+  <meta name="description" content="How I built an end-to-end revenue leakage detection system for e-commerce — identifying $9.5M in at-risk revenue through discount abuse, out-of-stock patterns, and pricing inefficiencies using Python, SQL, Tableau, and Streamlit." />
+  <link rel="icon" type="image/png" href="assets/photo1.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="../../css/post.css" />
+  <script>(function(){const t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();</script>
+</head>
+<body>
+
+<nav class="top-nav" id="top-nav">
+  <div class="wrap nav-row">
+    <a href="../../index.html" class="nav-logo" title="Home" aria-label="Home">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+    </a>
+    <button class="nav-btn nav-theme-mobile" onclick="toggleTheme()" title="Toggle theme"><span class="theme-icon"></span></button>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false"><span></span></button>
+    <div class="nav-right">
+      <a href="../blog.html" class="nav-link active">Blog</a>
+      <a href="../../index.html#projects" class="nav-link">Projects</a>
+      <a href="../../index.html#contact" class="nav-link">Contact</a>
+      <a href="../cli.html" class="nav-link" style="font-family:var(--f-mono);font-size:12px">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="m8 5-1.5 1.5L11 11l-4.5 4.5L8 17l6-6z"/><path d="M13 15h6v2h-6z"/></svg>CLI
+      </a>
+      <button class="nav-search-btn" data-search-trigger title="Search (⌘K)">
+        <svg viewBox="0 0 24 24"><path d="M21 21l-4.35-4.35M16.65 16.65A7.5 7.5 0 1 0 2 9.5a7.5 7.5 0 0 0 14.65 7.15z" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+        Search <span class="nav-search-kbd">⌘K</span>
+      </button>
+      <button class="nav-btn" onclick="toggleTheme()" title="Toggle theme"><span class="theme-icon"></span></button>
+    </div>
+  </div>
+  <div class="mobile-nav-panel" id="mobile-nav-panel" aria-hidden="true">
+    <a href="../blog.html" class="nav-link active">Blog</a>
+    <a href="../../index.html#projects" class="nav-link">Projects</a>
+    <a href="../../index.html#contact" class="nav-link">Contact</a>
+    <a href="../cli.html" class="nav-link" style="font-family:var(--f-mono);font-size:12px">CLI</a>
+    <button class="nav-search-btn" data-search-trigger>Search <span class="nav-search-kbd">⌘K</span></button>
+  </div>
+</nav>
+
+<main class="post-main">
+  <div class="post-wrap">
+
+    <a href="../blog.html" class="post-back">
+      <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+      Back to Blog
+    </a>
+
+    <header class="post-header">
+      <span class="post-cat">Projects</span>
+      <h1 class="post-title">Revenue Leakage Detection & Pricing Optimization for E-Commerce</h1>
+      <div class="post-meta">
+        <span>Apr 27, 2026</span>
+        <span class="post-meta-dot">·</span>
+        <span>10 min read</span>
+        <span class="post-meta-dot">·</span>
+        <span>Saurabh</span>
+      </div>
+    </header>
+
+    <article class="post-body">
+
+      <p>Revenue leakage is money that a business earns in theory but loses in practice — through excessive discounting, inefficient pricing, stockouts on high-demand products, and margin erosion hidden inside aggregated revenue numbers. This project built an end-to-end detection and optimization system using 27,889 e-commerce transactions, surfacing <strong>$9.54 million in at-risk revenue</strong> and generating concrete pricing recommendations across 47,009 products analysed.</p>
+
+      <blockquote>
+        <p>
+          🔗 <strong>Live Streamlit App:</strong> <a href="https://bit.ly/4ut8DZe" target="_blank" rel="noopener">bit.ly/4ut8DZe</a><br/>
+          📊 <strong>Tableau Dashboard:</strong> <a href="https://bit.ly/3QLRQyd" target="_blank" rel="noopener">bit.ly/3QLRQyd</a><br/>
+          📂 <strong>GitHub Repository:</strong> <a href="https://bit.ly/4cAy0lD" target="_blank" rel="noopener">bit.ly/4cAy0lD</a>
+        </p>
+      </blockquote>
+
+      <h2>The Problem</h2>
+      <p>Most e-commerce platforms that are losing money know their total revenue number. What they don't know is <em>where</em> that money is going. The analysis identified three primary leakage vectors: excessive discount depth (products discounted past their margin floor), out-of-stock revenue loss (demand exists but inventory doesn't), and pricing inefficiency (items priced below market rate given their ratings and category position).</p>
+
+      <p>Key findings from the analysis:</p>
+      <ul>
+        <li><strong>Total Revenue at Risk:</strong> $9.54 million</li>
+        <li><strong>Over-Discounted Products:</strong> 30,052 (75.2% of catalogue)</li>
+        <li><strong>COGs Revenue Loss:</strong> $1.54 million</li>
+        <li><strong>Highest Risk Seller:</strong> RatanFikri (P/L risk at 4%)</li>
+        <li><strong>Average Product Rating:</strong> 3.44 / 5</li>
+      </ul>
+
+      <h2>The Dataset & Feature Engineering</h2>
+      <p>The dataset covers 27,889 orders with product-level attributes including actual price, discounted price, discount percentage, category, sub-category, ratings, rating count, and seller information. Feature engineering was substantial — the raw columns weren't sufficient to identify leakage patterns directly.</p>
+
+      <pre><code>import pandas as pd
+import numpy as np
+
+df = pd.read_csv("ecommerce_data.csv")
+
+# Clean price columns (remove currency symbols, convert to float)
+df['actual_price'] = df['actual_price'].str.replace('[₹,]', '', regex=True).astype(float)
+df['discounted_price'] = df['discounted_price'].str.replace('[₹,]', '', regex=True).astype(float)
+df['discount_pct'] = df['discount_percentage'].str.replace('%', '').astype(float) / 100
+
+# Calculate margin proxy (assumes ~40% COGS baseline)
+COGS_RATE = 0.40
+df['cogs_estimate'] = df['actual_price'] * COGS_RATE
+df['margin_after_discount'] = df['discounted_price'] - df['cogs_estimate']
+df['is_below_cogs'] = df['margin_after_discount'] < 0
+
+# Discount risk flag
+df['discount_risk'] = df['discount_pct'] > 0.50  # >50% discount flagged
+
+# Out-of-stock revenue opportunity (products with high ratings but no recent orders)
+df['demand_score'] = df['rating'] * np.log1p(df['rating_count'])
+df['oos_risk'] = (df['demand_score'] > df['demand_score'].quantile(0.75)) & \
+                 (df['rating_count'] < df['rating_count'].quantile(0.25))</code></pre>
+
+      <h2>SQL Analysis Layer</h2>
+      <p>The core leakage analysis ran through a SQL pipeline on top of the cleaned data. Window functions were essential for comparing individual product performance against category baselines — you can't identify an outlier without a reference distribution.</p>
+
+      <pre><code>-- Discount distribution analysis per category
+SELECT
+  category,
+  sub_category,
+  COUNT(*) AS product_count,
+  ROUND(AVG(discount_pct) * 100, 1) AS avg_discount_pct,
+  ROUND(SUM(CASE WHEN discount_pct > 0.5 THEN actual_price - discounted_price ELSE 0 END), 2)
+    AS excess_discount_value,
+  COUNT(CASE WHEN margin_after_discount < 0 THEN 1 END) AS below_cogs_count
+FROM products
+GROUP BY category, sub_category
+ORDER BY excess_discount_value DESC;
+
+-- Top sellers by revenue at risk
+SELECT
+  seller_name,
+  COUNT(*) AS products,
+  ROUND(SUM(CASE WHEN is_below_cogs THEN actual_price - discounted_price ELSE 0 END), 2)
+    AS revenue_at_risk,
+  ROUND(AVG(discount_pct) * 100, 1) AS avg_discount_pct,
+  ROUND(AVG(rating), 2) AS avg_rating
+FROM products
+GROUP BY seller_name
+HAVING revenue_at_risk > 10000
+ORDER BY revenue_at_risk DESC
+LIMIT 20;</code></pre>
+
+      <h2>The Pricing Recommendation Engine</h2>
+      <p>The most technically interesting part of the project is the recommendation engine. Rather than just flagging problems, it generates specific pricing actions with expected revenue recovery estimates. The logic uses category-level percentile benchmarking — a product is considered underpriced if its price-to-rating ratio falls below the 25th percentile for its sub-category.</p>
+
+      <pre><code>def generate_pricing_recommendations(df: pd.DataFrame) -> pd.DataFrame:
+    recommendations = []
+
+    for category, group in df.groupby('sub_category'):
+        # Calculate category benchmarks
+        p25_price = group['discounted_price'].quantile(0.25)
+        p75_price = group['discounted_price'].quantile(0.75)
+        median_discount = group['discount_pct'].median()
+        avg_rating = group['rating'].mean()
+
+        for _, row in group.iterrows():
+            priority = 'Low'
+            action = None
+            recovery_est = 0
+
+            # Rule 1: Below COGS — urgent price correction needed
+            if row['margin_after_discount'] < 0:
+                priority = 'Critical'
+                action = 'Raise price above COGS floor'
+                recovery_est = abs(row['margin_after_discount']) * row['rating_count']
+
+            # Rule 2: Discount > 2x category median — discount abuse
+            elif row['discount_pct'] > median_discount * 2:
+                priority = 'High'
+                action = f'Reduce discount to category median ({median_discount*100:.0f}%)'
+                recovery_est = (row['discount_pct'] - median_discount) * row['actual_price']
+
+            # Rule 3: High rating but priced below category P25 — underpriced
+            elif row['rating'] > avg_rating + 0.5 and row['discounted_price'] < p25_price:
+                priority = 'Medium'
+                action = f'Price increase to category P25 (₹{p25_price:.0f})'
+                recovery_est = (p25_price - row['discounted_price']) * max(row['rating_count'], 1)
+
+            if action:
+                recommendations.append({
+                    'product': row['product_name'][:50],
+                    'category': category,
+                    'priority': priority,
+                    'action': action,
+                    'estimated_recovery': round(recovery_est, 2)
+                })
+
+    return pd.DataFrame(recommendations).sort_values('estimated_recovery', ascending=False)</code></pre>
+
+      <h2>Tableau Dashboard</h2>
+      <p>The Tableau public dashboard provides the executive-facing view: revenue at risk by category, discount distribution heatmaps, seller-level risk rankings, and a geographic breakdown of order concentration. It's designed for a category manager who needs to quickly identify which sub-categories need immediate pricing intervention versus which are performing efficiently.</p>
+      <p>The most valuable view in the dashboard is the discount vs margin scatter plot at the sub-category level — it immediately surfaces which categories are discounting heavily and still maintaining margin (fine) versus discounting heavily and destroying margin (urgent action needed).</p>
+
+      <h2>The Streamlit App</h2>
+      <p>The app has five pages: Home (KPI overview), AI Query (plain English questions against the dataset via Gemini), Sales Dashboard (interactive charts with preset query library), SQL Explorer, and AI Insights (full auto-generated BI report). The AI query integration follows the same two-call pattern used in the SQL BI Assistant project — separate calls for SQL generation and insight generation for better output quality on both.</p>
+
+      <h2>Business Recommendations Generated</h2>
+      <p>The engine produced four priority recommendations from the analysis:</p>
+      <ul>
+        <li><strong>Critical:</strong> 75.2% of products are over-discounted — implement category-specific discount caps immediately</li>
+        <li><strong>High:</strong> High discounts don't improve ratings — use dynamic pricing instead of blanket discounts</li>
+        <li><strong>Medium:</strong> Budget for most over-discounted across all sub-categories warrant seller-level review</li>
+        <li><strong>Low:</strong> Require seller profitability review before listing</li>
+      </ul>
+
+      <h2>What Made This Project Hard</h2>
+      <p>The hardest part wasn't the ML — it was deciding what "leakage" means precisely enough to measure it. Revenue leakage is a business concept, not a statistical one. Translating "the platform is losing money" into specific, queryable, quantifiable conditions required understanding the business model first and building the technical solution second. That ordering — business logic before code — is the discipline this project reinforced more than anything else.</p>
+
+    </article>
+
+    <!-- READ NEXT -->
+    <section class="read-next">
+      <p class="read-next-label">Read next</p>
+      <div class="read-next-grid">
+        <!-- Previous Project -->
+        <a href="future-of-data-analytics.html" class="read-next-card prev">
+          <span class="read-next-card-dir">
+            <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+            Previous
+          </span>
+          <span class="read-next-card-title">The Future of Data Analytics</span>
+          <span class="read-next-card-cat">Data Analysis</span>
+        </a>
+        <!-- Next Project -->
+        <a href="student-lifestyle-analysis.html" class="read-next-card next">
+          <span class="read-next-card-dir">
+            Next
+            <svg viewBox="0 0 24 24"><path d="M4 13h12.17l-5.59 5.59L12 20l8-8-8-8-1.41 1.41L16.17 11H4v2z"/></svg>
+          </span>
+          <span class="read-next-card-title">Student Lifestyle & Academic Performance Analysis</span>
+          <span class="read-next-card-cat">Projects</span>
+        </a>
+      </div>
+    </section>
+
+
+    <div class="post-footer">
+      <a href="../blog.html" class="post-back">
+        <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+        Back to Blog
+      </a>
+    </div>
+
+  </div>
+</main>
+
+<nav class="dock" id="bottom-dock">
+  <button class="dock-btn" onclick="window.location.href='../../index.html'" title="Home">
+    <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+  </button>
+  <button class="dock-btn on" onclick="window.location.href='../blog.html'" title="Blog">
+    <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+  </button>
+  <button class="dock-btn" onclick="window.location.href='../../index.html#projects'" title="Projects">
+    <svg viewBox="0 0 24 24"><path d="M3 3h8v8H3zm10 0h8v8h-8zM3 13h8v8H3zm10 0h8v8h-8z"/></svg>
+  </button>
+  <div class="dock-sep"></div>
+  <button class="dock-btn" onclick="window.location.href='../cli.html'" title="CLI Mode">
+    <svg viewBox="0 0 24 24"><path d="m8 5-1.5 1.5L11 11l-4.5 4.5L8 17l6-6zm5 10h6v2h-6z"/></svg>
+  </button>
+  <button class="dock-btn" onclick="toggleTheme()" title="Toggle theme"><span class="theme-icon"></span></button>
+</nav>
+
+<button class="search-float-btn" data-search-trigger title="Search (⌘K)">
+  <svg viewBox="0 0 24 24"><path d="M21 21l-4.35-4.35M16.65 16.65A7.5 7.5 0 1 0 2 9.5a7.5 7.5 0 0 0 14.65 7.15z" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+  Search <span class="search-inp-kbd">⌘K</span>
+</button>
+
+<div class="search-overlay" id="search-overlay">
+  <div class="search-box">
+    <div class="search-input-row">
+      <svg viewBox="0 0 24 24"><path d="M21 21l-4.35-4.35M16.65 16.65A7.5 7.5 0 1 0 2 9.5a7.5 7.5 0 0 0 14.65 7.15z" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+      <input id="search-inp" class="search-inp" type="text" placeholder="Type a command or search..." autocomplete="off" spellcheck="false" />
+      <button class="search-close-btn" type="button" aria-label="Close search">×</button>
+      <span class="search-inp-kbd">ESC</span>
+    </div>
+    <div class="search-results" id="search-results"></div>
+    <div class="search-footer">
+      <span class="search-footer-kbd">↑↓</span> navigate &nbsp;
+      <span class="search-footer-kbd">↵</span> select &nbsp;
+      <span class="search-footer-kbd">ESC</span> close
+    </div>
+  </div>
+</div>
+
+<script src="../../js/main.js"></script>
+</body>
+</html>

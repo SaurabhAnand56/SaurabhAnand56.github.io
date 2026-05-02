@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Lifestyle & Academic Performance Analysis — Saurabh</title>
+  <meta name="description" content="An end-to-end ML project predicting student exam scores and performance categories from lifestyle factors — sleep, diet, exercise, gaming, and social media usage." />
+  <link rel="icon" type="image/png" href="assets/photo1.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="../../css/post.css" />
+  <script>(function(){const t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();</script>
+</head>
+<body>
+
+<nav class="top-nav" id="top-nav">
+  <div class="wrap nav-row">
+    <a href="../../index.html" class="nav-logo" title="Home" aria-label="Home">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+    </a>
+    <button class="nav-btn nav-theme-mobile" onclick="toggleTheme()" title="Toggle theme"><span class="theme-icon"></span></button>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false"><span></span></button>
+    <div class="nav-right">
+      <a href="../blog.html" class="nav-link active">Blog</a>
+      <a href="../../index.html#projects" class="nav-link">Projects</a>
+      <a href="../../index.html#contact" class="nav-link">Contact</a>
+      <a href="../cli.html" class="nav-link" style="font-family:var(--f-mono);font-size:12px">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="m8 5-1.5 1.5L11 11l-4.5 4.5L8 17l6-6z"/><path d="M13 15h6v2h-6z"/></svg>CLI
+      </a>
+      <button class="nav-search-btn" data-search-trigger title="Search (⌘K)">
+        <svg viewBox="0 0 24 24"><path d="M21 21l-4.35-4.35M16.65 16.65A7.5 7.5 0 1 0 2 9.5a7.5 7.5 0 0 0 14.65 7.15z" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+        Search <span class="nav-search-kbd">⌘K</span>
+      </button>
+      <button class="nav-btn" onclick="toggleTheme()" title="Toggle theme"><span class="theme-icon"></span></button>
+    </div>
+  </div>
+  <div class="mobile-nav-panel" id="mobile-nav-panel" aria-hidden="true">
+    <a href="../blog.html" class="nav-link active">Blog</a>
+    <a href="../../index.html#projects" class="nav-link">Projects</a>
+    <a href="../../index.html#contact" class="nav-link">Contact</a>
+    <a href="../cli.html" class="nav-link" style="font-family:var(--f-mono);font-size:12px">CLI</a>
+    <button class="nav-search-btn" data-search-trigger>Search <span class="nav-search-kbd">⌘K</span></button>
+  </div>
+</nav>
+
+<main class="post-main">
+  <div class="post-wrap">
+
+    <a href="../blog.html" class="post-back">
+      <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+      Back to Blog
+    </a>
+
+    <header class="post-header">
+      <span class="post-cat">Projects</span>
+      <h1 class="post-title">Student Lifestyle & Academic Performance Analysis — ML from EDA to Deployment</h1>
+      <div class="post-meta">
+        <span>Apr 27, 2026</span>
+        <span class="post-meta-dot">·</span>
+        <span>10 min read</span>
+        <span class="post-meta-dot">·</span>
+        <span>Saurabh</span>
+      </div>
+    </header>
+
+    <article class="post-body">
+
+      <p>Does sleep really affect your grades? What about social media usage, exercise frequency, or diet quality? These questions have obvious intuitive answers — but intuition isn't data. This project used a 2,000-student dataset of lifestyle and academic variables to build a full ML pipeline: EDA, regression, classification, clustering, and a deployed Streamlit app where you can input your own lifestyle habits and get a predicted exam score.</p>
+
+      <blockquote>
+        <p>
+          🔗 <strong>Live Streamlit App:</strong> <a href="https://bit.ly/student-life-perf" target="_blank" rel="noopener">bit.ly/student-life-perf</a><br/>
+          📂 <strong>GitHub Repository:</strong> <a href="https://bit.ly/student-perf-analysis" target="_blank" rel="noopener">bit.ly/student-perf-analysis</a>
+        </p>
+      </blockquote>
+
+      <h2>The Dataset</h2>
+      <p>The dataset contains 2,000 student records across 16 features: daily study hours, social media usage (hours/day), Netflix usage, sleep hours, physical activity frequency, diet quality (Poor/Fair/Good), gender, age, stress level, attendance percentage, parental education level, internet quality, extracurricular participation, gaming hours, and the target — exam score (0–100).</p>
+      <p>The academic performance category (Poor/Average/Good/Excellent) was derived from the exam score and used as the classification target. Data quality was clean — no missing values — which made the EDA phase faster and let the focus stay on feature relationships rather than imputation decisions.</p>
+
+      <h2>Part 1 — Exploratory Data Analysis</h2>
+      <p>The EDA started with correlation analysis to identify which features had the strongest linear relationship with exam score before modeling. Study hours showed the strongest positive correlation (r = 0.82), followed by sleep hours (r = 0.61) and attendance (r = 0.58). Social media usage and gaming hours showed the strongest negative correlations.</p>
+
+      <pre><code>import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+df = pd.read_csv("student_lifestyle_dataset.csv")
+
+# Correlation heatmap
+plt.figure(figsize=(14, 10))
+numeric_cols = df.select_dtypes(include='number').columns
+corr = df[numeric_cols].corr()
+sns.heatmap(corr, annot=True, fmt='.2f', cmap='coolwarm',
+            center=0, square=True, linewidths=0.5)
+plt.title('Feature Correlation Matrix', fontsize=14, pad=20)
+plt.tight_layout()
+plt.savefig('charts/correlation_heatmap.png', dpi=150)
+
+# Study hours vs exam score by diet quality
+sns.scatterplot(data=df, x='study_hours_per_day', y='exam_score',
+                hue='diet_quality', palette='Set2', alpha=0.6, s=60)
+plt.title('Study Hours vs Exam Score by Diet Quality')
+plt.savefig('charts/study_vs_score_diet.png', dpi=150)</code></pre>
+
+      <p>A key EDA finding: diet quality acts as a modifier rather than a primary driver. Students with poor diet quality who study the same hours as good-diet students score about 4–6 points lower on average. The relationship isn't about diet replacing study — it's about diet affecting the efficiency of study time.</p>
+
+      <h2>Part 2 — Machine Learning: Regression</h2>
+      <p>The regression task was predicting exam score as a continuous value. Four models were trained and compared: Linear Regression, Random Forest Regressor, Gradient Boosting, and Ridge Regression. Features were encoded (diet quality mapped to ordinal integers, gender one-hot encoded) and the dataset split 80/20.</p>
+
+      <pre><code>from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor
+from sklearn.linear_model import LinearRegression, Ridge
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import r2_score, mean_absolute_error
+from sklearn.preprocessing import LabelEncoder
+
+# Encode categorical features
+le = LabelEncoder()
+df['diet_quality_enc'] = le.fit_transform(df['diet_quality'])
+df = pd.get_dummies(df, columns=['gender'], drop_first=True)
+
+features = ['study_hours_per_day', 'sleep_hours_per_day', 'social_media_hours',
+            'attendance_percentage', 'physical_activity_freq', 'diet_quality_enc',
+            'stress_level', 'gaming_hours', 'netflix_hours', 'gender_Male']
+
+X = df[features]
+y = df['exam_score']
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+models = {
+    'Linear Regression': LinearRegression(),
+    'Random Forest': RandomForestRegressor(n_estimators=100, random_state=42),
+    'Gradient Boosting': GradientBoostingRegressor(n_estimators=100, random_state=42),
+    'Ridge': Ridge(alpha=1.0)
+}
+
+for name, model in models.items():
+    model.fit(X_train, y_train)
+    preds = model.predict(X_test)
+    print(f"{name}: R²={r2_score(y_test, preds):.4f}, MAE={mean_absolute_error(y_test, preds):.2f}")</code></pre>
+
+      <p>Results: Linear Regression achieved R² = 0.89, MAE = 3.46. Random Forest: R² = 0.91, MAE = 3.08. Gradient Boosting: R² = 0.90, MAE = 3.21. The high R² across all models suggests the relationships in this dataset are largely linear — study hours, sleep, and attendance together explain most of the variance. The Random Forest was selected for deployment.</p>
+
+      <h2>Part 2 — Classification</h2>
+      <p>The classification task predicted performance category (Poor / Average / Good / Excellent) derived from score bands. Random Forest achieved 94% accuracy, with most errors occurring at the boundary between adjacent categories — which makes sense, since a student scoring 69 vs 70 is statistically identical but falls into different classes.</p>
+
+      <h2>Part 3 — Clustering</h2>
+      <p>K-Means clustering with k=4 (selected by elbow method) was used to discover natural student segments without using the target label. The four clusters that emerged mapped closely to intuitive archetypes: high-study/high-sleep high performers, social-media-heavy average performers, balanced moderate achievers, and low-study/high-gaming underperformers. The cluster labels weren't predetermined — the algorithm found them from the feature data alone, which is the validation that the signal is real.</p>
+
+      <h2>The Streamlit App</h2>
+      <p>The deployed app has five pages matching each analytical section, plus a personal predictor where users input their own lifestyle habits and get an exam score prediction with a confidence interval and personalized recommendations. The recommendations are rule-based post-processing on the model output — not a second ML model — which keeps them interpretable and actionable rather than opaque.</p>
+
+      <h2>Feature Importance</h2>
+      <p>The Random Forest feature importances confirmed the EDA correlations: study hours per day was the most important feature (importance score 0.41), followed by attendance (0.18), sleep hours (0.14), and social media usage (0.11). Gaming hours, diet quality, and physical activity followed at lower but non-negligible importance. The model is essentially saying: control for study time and attendance first, then everything else is a secondary effect.</p>
+
+      <h2>What I Learned</h2>
+      <p>High R² doesn't mean a hard problem — it means the features strongly predict the target, which in this case is expected given that study hours is a near-direct cause of exam performance. The more interesting modeling challenge was the clustering, where there's no ground truth to compare against. Learning to validate unsupervised results through interpretability rather than metrics was the most valuable methodological takeaway from this project.</p>
+
+    </article>
+
+  <!-- READ NEXT -->
+    <section class="read-next">
+      <p class="read-next-label">Read next</p>
+      <div class="read-next-grid">
+        <!-- Previous Project -->
+        <a href="revenue-leakage-detection.html" class="read-next-card prev">
+          <span class="read-next-card-dir">
+            <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+            Previous
+          </span>
+          <span class="read-next-card-title">Revenue Leakage Detection & Pricing Optimization for E-Commerce</span>
+          <span class="read-next-card-cat">Projects</span>
+        </a>
+        <!-- Next Project -->
+        <a href="ai-sql-business-intelligence.html" class="read-next-card next">
+          <span class="read-next-card-dir">
+            Next
+            <svg viewBox="0 0 24 24"><path d="M4 13h12.17l-5.59 5.59L12 20l8-8-8-8-1.41 1.41L16.17 11H4v2z"/></svg>
+          </span>
+          <span class="read-next-card-title">Building an AI-Powered SQL Business Intelligence</span>
+          <span class="read-next-card-cat">Projects</span>
+        </a>
+      </div>
+    </section>
+
+    <div class="post-footer">
+      <a href="../blog.html" class="post-back">
+        <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+        Back to Blog
+      </a>
+    </div>
+
+  </div>
+</main>
+
+<nav class="dock" id="bottom-dock">
+  <button class="dock-btn" onclick="window.location.href='../../index.html'" title="Home">
+    <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+  </button>
+  <button class="dock-btn on" onclick="window.location.href='../blog.html'" title="Blog">
+    <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+  </button>
+  <button class="dock-btn" onclick="window.location.href='../../index.html#projects'" title="Projects">
+    <svg viewBox="0 0 24 24"><path d="M3 3h8v8H3zm10 0h8v8h-8zM3 13h8v8H3zm10 0h8v8h-8z"/></svg>
+  </button>
+  <div class="dock-sep"></div>
+  <button class="dock-btn" onclick="window.location.href='../cli.html'" title="CLI Mode">
+    <svg viewBox="0 0 24 24"><path d="m8 5-1.5 1.5L11 11l-4.5 4.5L8 17l6-6zm5 10h6v2h-6z"/></svg>
+  </button>
+  <button class="dock-btn" onclick="toggleTheme()" title="Toggle theme"><span class="theme-icon"></span></button>
+</nav>
+
+<button class="search-float-btn" data-search-trigger title="Search (⌘K)">
+  <svg viewBox="0 0 24 24"><path d="M21 21l-4.35-4.35M16.65 16.65A7.5 7.5 0 1 0 2 9.5a7.5 7.5 0 0 0 14.65 7.15z" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+  Search <span class="search-inp-kbd">⌘K</span>
+</button>
+
+<div class="search-overlay" id="search-overlay">
+  <div class="search-box">
+    <div class="search-input-row">
+      <svg viewBox="0 0 24 24"><path d="M21 21l-4.35-4.35M16.65 16.65A7.5 7.5 0 1 0 2 9.5a7.5 7.5 0 0 0 14.65 7.15z" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+      <input id="search-inp" class="search-inp" type="text" placeholder="Type a command or search..." autocomplete="off" spellcheck="false" />
+      <button class="search-close-btn" type="button" aria-label="Close search">×</button>
+      <span class="search-inp-kbd">ESC</span>
+    </div>
+    <div class="search-results" id="search-results"></div>
+    <div class="search-footer">
+      <span class="search-footer-kbd">↑↓</span> navigate &nbsp;
+      <span class="search-footer-kbd">↵</span> select &nbsp;
+      <span class="search-footer-kbd">ESC</span> close
+    </div>
+  </div>
+</div>
+
+<script src="../../js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog — Saurabh</title>
+  <meta name="description" content="Thoughts on web development, AI, and building software." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <script>
+    (function(){const t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();
+  </script>
+</head>
+<body>
+
+<!-- TOP NAV -->
+<nav class="top-nav" id="top-nav">
+  <div class="wrap nav-row">
+    <a href="../index.html" class="nav-logo" title="Home" aria-label="Home">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+    </a>
+    <button class="nav-btn nav-theme-mobile" onclick="toggleTheme()" title="Toggle theme">
+      <span class="theme-icon"></span>
+    </button>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false">
+      <span></span>
+    </button>
+    <div class="nav-right">
+      <a href="blog.html" class="nav-link active">Blog</a>
+      <a href="../index.html#projects" class="nav-link">Projects</a>
+      <a href="../index.html#contact" class="nav-link">Contact</a>
+      <a href="cli.html" class="nav-link" style="font-family:var(--f-mono);font-size:12px">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="m8 5-1.5 1.5L11 11l-4.5 4.5L8 17l6-6z"/><path d="M13 15h6v2h-6z"/></svg>
+        CLI
+      </a>
+      <button class="nav-search-btn" data-search-trigger title="Search (⌘K)">
+        <svg viewBox="0 0 24 24"><path d="M21 21l-4.35-4.35M16.65 16.65A7.5 7.5 0 1 0 2 9.5a7.5 7.5 0 0 0 14.65 7.15z" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+        Search
+        <span class="nav-search-kbd">⌘K</span>
+      </button>
+      <button class="nav-btn" onclick="toggleTheme()" title="Toggle theme">
+        <span class="theme-icon"></span>
+      </button>
+    </div>
+  </div>
+  <div class="mobile-nav-panel" id="mobile-nav-panel" aria-hidden="true">
+    <a href="blog.html" class="nav-link active">Blog</a>
+    <a href="../index.html#projects" class="nav-link">Projects</a>
+    <a href="../index.html#contact" class="nav-link">Contact</a>
+    <a href="cli.html" class="nav-link" style="font-family:var(--f-mono);font-size:12px">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="m8 5-1.5 1.5L11 11l-4.5 4.5L8 17l6-6z"/><path d="M13 15h6v2h-6z"/></svg>
+      CLI
+    </a>
+    <button class="nav-search-btn" data-search-trigger title="Search (⌘K)">
+      <svg viewBox="0 0 24 24"><path d="M21 21l-4.35-4.35M16.65 16.65A7.5 7.5 0 1 0 2 9.5a7.5 7.5 0 0 0 14.65 7.15z" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+      Search
+      <span class="nav-search-kbd">⌘K</span>
+    </button>
+  </div>
+</nav>
+
+<!-- BLOG HERO -->
+<section class="blog-hero">
+  <div class="wrap">
+    <p class="sec-label" style="margin-bottom:10px">Writing</p>
+    <h1 style="font-family:var(--f-head);font-size:clamp(30px,5vw,44px);font-weight:800;letter-spacing:-1.2px;color:var(--text);line-height:1.1;margin-bottom:14px">
+      Blog
+    </h1>
+    <p style="font-size:15px;color:var(--text2);max-width:420px;line-height:1.75;margin-bottom:32px">
+      Thoughts on web development, AI, and the craft of building software.
+      <span style="font-family:var(--f-mono);font-size:12px;color:var(--text3);display:block;margin-top:6px">
+        <span id="post-count" style="color:var(--accent)">5</span> posts · Updated regularly
+      </span>
+    </p>
+
+    <!-- Filters -->
+    <div class="blog-filters">
+      <button class="filt-btn on" data-cat="all">All</button>
+      <button class="filt-btn" data-cat="ai">AI</button>
+      <button class="filt-btn" data-cat="career">Career</button>
+      <button class="filt-btn" data-cat="data-analysis">Data Analysis</button>
+      <button class="filt-btn" data-cat="projects">Projects</button>
+      <button class="filt-btn" data-cat="tools">Tools</button>
+    </div>
+  </div>
+</section>
+
+<!-- BLOG LIST -->
+<div class="wrap">
+  <div class="blog-list" id="blog-list">
+
+      <a href="posts/future-of-data-analytics.html" class="blog-item reveal" data-cat="data-analysis">
+      <div class="blog-l">
+        <span class="blog-cat">Data Analysis</span>
+        <div class="blog-title">The Future of Data Analytics</div>
+        <div class="blog-excerpt">How real-time pipelines, AI-augmented analysis, the lakehouse architecture, and the metrics layer are reshaping what it means to work with data — and what analysts need to learn next.</div>
+      </div>
+      <div class="blog-r">
+        <span class="blog-date">May 2, 2025</span>
+        <span class="blog-rt">8 min read</span>
+      </div>
+    </a>
+    
+    <a href="posts/revenue-leakage-detection.html" class="blog-item reveal stagger-1" data-cat="projects">
+      <div class="blog-l">
+        <span class="blog-cat">Projects</span>
+        <div class="blog-title">Revenue Leakage Detection & Pricing Optimization for E-Commerce</div>
+        <div class="blog-excerpt">How I identified $9.54M in at-risk revenue across 47,000 products — surfacing discount abuse, pricing inefficiencies, and out-of-stock losses using Python, SQL, Tableau, and Streamlit.</div>
+      </div>
+      <div class="blog-r">
+        <span class="blog-date">Apr 27, 2026</span>
+        <span class="blog-rt">10 min read</span>
+      </div>
+    </a>
+
+    <a href="posts/student-lifestyle-analysis.html" class="blog-item reveal stagger-2" data-cat="projects">
+      <div class="blog-l">
+        <span class="blog-cat">Projects</span>
+        <div class="blog-title">Student Lifestyle & Academic Performance Analysis — ML from EDA to Deployment</div>
+        <div class="blog-excerpt">An end-to-end ML project predicting exam scores from lifestyle habits — sleep, study hours, social media, diet — with regression, classification, clustering, and a live Streamlit predictor.</div>
+      </div>
+      <div class="blog-r">
+        <span class="blog-date">Apr 27, 2026</span>
+        <span class="blog-rt">10 min read</span>
+      </div>
+    </a>
+
+    <a href="posts/ai-sql-business-intelligence.html" class="blog-item reveal stagger-3" data-cat="projects">
+      <div class="blog-l">
+        <span class="blog-cat">Projects</span>
+        <div class="blog-title">Building an AI-Powered SQL Business Intelligence Assistant with Gemini</div>
+        <div class="blog-excerpt">Ask a question in plain English, get SQL generated by Gemini AI, run it against a real database, and receive a chart plus a business insight — all in one Streamlit app.</div>
+      </div>
+      <div class="blog-r">
+        <span class="blog-date">Apr 27, 2026</span>
+        <span class="blog-rt">9 min read</span>
+      </div>
+    </a>
+
+    <a href="posts/netflix-eda-powerbi.html" class="blog-item reveal stagger-4" data-cat="projects">
+      <div class="blog-l">
+        <span class="blog-cat">Projects</span>
+        <div class="blog-title">Building the Netflix EDA Dashboard — Python, Power BI & Streamlit</div>
+        <div class="blog-excerpt">A complete Netflix content analysis: EDA on 8,800+ titles, a Power BI dashboard for business reporting, and a Streamlit app with content-based recommendations using TF-IDF similarity.</div>
+      </div>
+      <div class="blog-r">
+        <span class="blog-date">May 2, 2026</span>
+        <span class="blog-rt">8 min read</span>
+      </div>
+    </a>
+
+  </div>
+
+  <div id="empty-state" style="display:none;padding:60px 0;text-align:center">
+    <p style="font-family:var(--f-mono);font-size:13px;color:var(--text3)">No posts found in this category.</p>
+  </div>
+
+  <div style="height:60px"></div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="footer-row">
+      <div class="footer-brand">
+        <div class="brand-name">Saurabh</div>
+<p>Data Analyst from Hyderabad, India.<br>
+Building data products that turn numbers into decisions.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="pages/blog.html">Blog</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="pages/cli.html">CLI</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Social</h4>
+        <ul>
+          <li><a href="https://github.com/SaurabhAnand56" target="_blank">GitHub</a></li>
+          <li><a href="https://x.com/Saurabh_Anand56" target="_blank">Twitter / X</a></li>
+          <li><a href="https://linkedin.com/in/saurabhanand56" target="_blank">LinkedIn</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Saurabh. Made with ❤️</span>
+      <span>You are visitor <span class="visitor" id="visitor-count">—</span></span>
+    </div>
+  </div>
+</footer>
+
+<!-- BOTTOM DOCK -->
+<nav class="dock" id="bottom-dock">
+  <button class="dock-btn" onclick="window.location.href='../index.html'" title="Home">
+    <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+  </button>
+  <button class="dock-btn on" onclick="window.location.href='blog.html'" title="Blog">
+    <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+  </button>
+  <button class="dock-btn" onclick="window.location.href='../index.html#projects'" title="Projects">
+    <svg viewBox="0 0 24 24"><path d="M3 3h8v8H3zm10 0h8v8h-8zM3 13h8v8H3zm10 0h8v8h-8z"/></svg>
+  </button>
+  <div class="dock-sep"></div>
+  <button class="dock-btn" onclick="window.location.href='cli.html'" title="CLI Mode">
+    <svg viewBox="0 0 24 24"><path d="m8 5-1.5 1.5L11 11l-4.5 4.5L8 17l6-6zm5 10h6v2h-6z"/></svg>
+  </button>
+  <button class="dock-btn" onclick="toggleTheme()" title="Toggle theme">
+    <span class="theme-icon"></span>
+  </button>
+</nav>
+
+<button class="search-float-btn" data-search-trigger title="Search (⌘K)">
+  <svg viewBox="0 0 24 24"><path d="M21 21l-4.35-4.35M16.65 16.65A7.5 7.5 0 1 0 2 9.5a7.5 7.5 0 0 0 14.65 7.15z" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+  Search
+  <span class="search-inp-kbd">⌘K</span>
+</button>
+
+<!-- SEARCH MODAL -->
+<div class="search-overlay" id="search-overlay">
+  <div class="search-box">
+    <div class="search-input-row">
+      <svg viewBox="0 0 24 24"><path d="M21 21l-4.35-4.35M16.65 16.65A7.5 7.5 0 1 0 2 9.5a7.5 7.5 0 0 0 14.65 7.15z" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+      <input id="search-inp" class="search-inp" type="text" placeholder="Type a command or search..." autocomplete="off" spellcheck="false" />
+      <button class="search-close-btn" type="button" aria-label="Close search">×</button>
+      <span class="search-inp-kbd">ESC</span>
+    </div>
+    <div class="search-results" id="search-results"></div>
+    <div class="search-footer">
+      <span class="search-footer-kbd">↑↓</span> navigate &nbsp;
+      <span class="search-footer-kbd">↵</span> select &nbsp;
+      <span class="search-footer-kbd">ESC</span> close
+    </div>
+  </div>
+</div>
+
+<script src="../js/main.js"></script>
+<script>
+  document.querySelectorAll('.filt-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      setTimeout(() => {
+        const visible = document.querySelectorAll('.blog-item:not([style*="display: none"])').length;
+        document.getElementById('post-count').textContent = visible;
+        document.getElementById('empty-state').style.display = visible === 0 ? 'block' : 'none';
+      }, 10);
+    });
+  });
+</script>
+</body>
+</html>

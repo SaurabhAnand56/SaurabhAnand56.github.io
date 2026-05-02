@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CLI — Saurabh</title>
+  <meta name="description" content="Saurabh Portfolio CLI — navigate via terminal commands." />
+  <link rel="icon" type="image/png" href="assets/photo1.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body class="cli-page">
+
+<!-- TOP BAR -->
+<div class="cli-topbar">
+  <a href="../index.html" class="cli-back">
+    <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+    Back
+  </a>
+  <span style="font-size:11px;color:rgba(255,255,255,.2);font-family:var(--f-mono)">saurabh@portfolio:~</span>
+  <a href="../index.html" style="font-size:11px;color:rgba(255,255,255,.3);font-family:var(--f-mono);text-decoration:none;transition:color .2s" onmouseover="this.style.color='rgba(255,255,255,.65)'" onmouseout="this.style.color='rgba(255,255,255,.3)'">
+    Switch to GUI →
+  </a>
+</div>
+
+<!-- TERMINAL BODY -->
+<div class="cli-body">
+
+  <!-- ASCII Art: SAURABH CLI — single row, compact block font -->
+   <div class="cli-ascii">
+███████╗ █████╗ ██╗   ██╗██████╗  █████╗ ██████╗ ██╗  ██╗     ██████╗██╗     ██╗
+██╔════╝██╔══██╗██║   ██║██╔══██╗██╔══██╗██╔══██╗██║  ██║    ██╔════╝██║     ██║
+███████╗███████║██║   ██║██████╔╝███████║██████╔╝███████║    ██║     ██║     ██║
+╚════██║██╔══██║██║   ██║██╔══██╗██╔══██║██╔══██╗██╔══██║    ██║     ██║     ██║
+███████║██║  ██║╚██████╔╝██║  ██║██║  ██║██████╔╝██║  ██║    ╚██████╗███████╗██║
+╚══════╝╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═════╝ ╚═╝  ╚═╝     ╚═════╝╚══════╝╚═╝
+                                                                                </div>
+
+  <!-- Output container -->
+  <div class="cli-out" id="cli-output"></div>
+
+  <!-- Input row -->
+  <div class="cli-input-row">
+    <span class="c-prompt" id="cli-live-prompt">saurabh@portfolio:~$</span>
+    <input
+      id="cli-input"
+      class="cli-inp"
+      type="text"
+      autocomplete="off"
+      autocorrect="off"
+      autocapitalize="off"
+      spellcheck="false"
+      placeholder=" type a command..."
+      aria-label="CLI input"
+    />
+  </div>
+
+</div>
+
+<script src="../js/main.js"></script>
+</body>
+</html>
