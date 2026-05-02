@@ -88,6 +88,23 @@ function initBlogFilter() {
   const btns = document.querySelectorAll('.filt-btn');
   const items = document.querySelectorAll('.blog-item');
   if (!btns.length) return;
+
+  const updateFirstVisible = () => {
+    let firstVisibleFound = false;
+    items.forEach(item => {
+      if (item.style.display === 'none') {
+        item.classList.remove('first-visible');
+      } else if (!firstVisibleFound) {
+        item.classList.add('first-visible');
+        firstVisibleFound = true;
+      } else {
+        item.classList.remove('first-visible');
+      }
+    });
+  };
+
+  updateFirstVisible();
+
   btns.forEach(btn => {
     btn.addEventListener('click', () => {
       btns.forEach(b => b.classList.remove('on'));
@@ -96,6 +113,7 @@ function initBlogFilter() {
       items.forEach(item => {
         item.style.display = (cat === 'all' || item.dataset.cat === cat) ? '' : 'none';
       });
+      updateFirstVisible();
       // update count
       const countEl = document.getElementById('post-count');
       const emptyEl = document.getElementById('empty-state');
