@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Impact of AI on Data Analyst Jobs — Saurabh</title>
+  <meta name="description" content="A story about what actually happened when AI entered the data analyst's workflow — told from the inside." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="../../css/post.css" />
+  <script>(function(){const t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();</script>
+</head>
+<body>
+
+<nav class="top-nav" id="top-nav">
+  <div class="wrap nav-row">
+    <a href="../../index.html" class="nav-logo" title="Home" aria-label="Home">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+    </a>
+    <button class="nav-btn nav-theme-mobile" onclick="toggleTheme()" title="Toggle theme"><span class="theme-icon"></span></button>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false"><span></span></button>
+    <div class="nav-right">
+      <a href="../blog.html" class="nav-link active">Blog</a>
+      <a href="../../index.html#projects" class="nav-link">Projects</a>
+      <a href="../../index.html#contact" class="nav-link">Contact</a>
+      <a href="../cli.html" class="nav-link" style="font-family:var(--f-mono);font-size:12px">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="m8 5-1.5 1.5L11 11l-4.5 4.5L8 17l6-6z"/><path d="M13 15h6v2h-6z"/></svg>CLI
+      </a>
+      <button class="nav-search-btn" data-search-trigger title="Search (⌘K)">
+        <svg viewBox="0 0 24 24"><path d="M21 21l-4.35-4.35M16.65 16.65A7.5 7.5 0 1 0 2 9.5a7.5 7.5 0 0 0 14.65 7.15z" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+        Search <span class="nav-search-kbd">⌘K</span>
+      </button>
+      <button class="nav-btn" onclick="toggleTheme()" title="Toggle theme"><span class="theme-icon"></span></button>
+    </div>
+  </div>
+  <div class="mobile-nav-panel" id="mobile-nav-panel" aria-hidden="true">
+    <a href="../blog.html" class="nav-link active">Blog</a>
+    <a href="../../index.html#projects" class="nav-link">Projects</a>
+    <a href="../../index.html#contact" class="nav-link">Contact</a>
+    <a href="../cli.html" class="nav-link" style="font-family:var(--f-mono);font-size:12px">CLI</a>
+    <button class="nav-search-btn" data-search-trigger>Search <span class="nav-search-kbd">⌘K</span></button>
+  </div>
+</nav>
+
+<main class="post-main">
+  <div class="post-wrap">
+
+    <a href="../blog.html" class="post-back">
+      <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+      Back to Blog
+    </a>
+
+    <header class="post-header">
+      <span class="post-cat">AI</span>
+      <h1 class="post-title">The Impact of AI on Data Analyst Jobs</h1>
+      <div class="post-meta">
+        <span>May 3, 2026</span>
+        <span class="post-meta-dot">·</span>
+        <span>8 min read</span>
+        <span class="post-meta-dot">·</span>
+        <span>Saurabh</span>
+      </div>
+    </header>
+
+    <article class="post-body">
+
+      <p>Let me tell you a story about a Tuesday.</p>
+
+      <p>It's 9 AM. Priya, a data analyst at a mid-size e-commerce company, opens her laptop. Her Slack has three messages waiting. Her manager wants to know why sales dropped in the West region last week. A product manager wants a breakdown of which customer segments are churning. And someone from finance wants a monthly revenue reconciliation — the same one Priya has been building manually in Excel for two years, every single month, without fail.</p>
+
+      <p>This was her Tuesday in 2022. Let me tell you what her Tuesday looks like in 2025.</p>
+
+      <h2>The Same Tuesday, Three Years Later</h2>
+
+      <p>The finance reconciliation? It runs automatically every month-end. A Python script pulls the data, formats it exactly the way finance wants, and emails it. Priya built it once, eighteen months ago, and hasn't thought about it since.</p>
+
+      <p>The churn breakdown? She opens a dashboard she built with her BI tool. Filters by segment. The answer is already there, updating daily. Two minutes.</p>
+
+      <p>The West region drop? She types the question into her AI query tool — the one her team built on top of their data warehouse. It generates SQL, runs it, and shows her a chart. She asks a follow-up: "Break this down by product category." Another chart. She has a hypothesis in ten minutes and a slide ready to share in twenty.</p>
+
+      <p>By 10 AM, Priya has answered all three requests. In 2022, this would have been her entire day.</p>
+
+      <figure class="post-img-wrap">
+        <img src="../../assets/ai-impact-data-analyst-jobs.svg" alt="Bar chart showing automation risk for different data analyst tasks — ad-hoc SQL and manual reports at high risk, strategic analysis and business judgment at low risk" class="post-img" />
+        <figcaption class="post-img-caption">Repetitive execution tasks face the highest automation risk. Judgment and communication are becoming more valuable, not less.</figcaption>
+      </figure>
+
+      <h2>What Actually Got Automated</h2>
+
+      <p>The headlines always say "AI will replace data analysts." That's not what happened. What got automated was the most painful, least interesting parts of the job.</p>
+
+      <p>The recurring reports that used to consume every Monday morning. The ad-hoc SQL queries that stakeholders sent in all day — questions that were individually simple but collectively exhausting. The data cleaning pipelines that required careful but mechanical attention. The dashboard updates that were just copy-paste with new numbers.</p>
+
+      <p>Nobody is crying about losing those tasks. The analysts who are thriving didn't mourn them. They automated everything automatable as fast as they could — and used the freed-up time to do the work they actually wanted to do.</p>
+
+      <h2>What Didn't Get Automated</h2>
+
+      <p>The West region question isn't really "why did sales drop." It's: <em>Is this signal or noise? If it's signal, is it a product problem, a logistics problem, a pricing problem, or a competitor problem? Which of those should we actually act on this week, and which can wait? Who needs to be in the room when we decide?</em></p>
+
+      <p>That chain of thinking — from data to decision — still runs through a human brain. The AI surfaced the number. A person figured out what it meant and what to do about it.</p>
+
+      <p>The same is true of stakeholder relationships. The product manager who asks for a churn breakdown isn't just asking for a chart. They're asking Priya — specifically, someone who knows the data and has been watching these numbers for two years — whether their intuition about customer behaviour is right or wrong. That trust, that context, that institutional knowledge? Completely unautomatable.</p>
+
+      <h2>The Analysts Who Got Hurt</h2>
+
+      <p>But let's be honest. Not everyone navigated this well.</p>
+
+      <p>Some analysts treated AI tools as a threat and refused to engage with them. They kept doing things the slow way. Their output looked the same as it always had — and as AI-assisted colleagues started answering questions faster and taking on more complex work, the slowness became visible.</p>
+
+      <p>Some junior analysts who were hired specifically for high-volume, low-complexity SQL work found that work genuinely dried up. The entry rung of the ladder got narrower. That's real, and it's not a comfortable thing to acknowledge.</p>
+
+      <p>And some analysts were good at execution but had never developed opinions — never pushed back on a brief, never told a stakeholder "I think you're asking the wrong question." When execution got easier for everyone, having no opinion was suddenly a visible gap.</p>
+
+      <h2>The Analysts Who Got Better</h2>
+
+      <p>The ones who thrived did something specific: they treated every automation win as a budget. Time reclaimed from the churn report went straight into understanding why customers were churning — not just measuring it. Time reclaimed from the monthly reconciliation went into building a proactive alert system instead of a reactive document.</p>
+
+      <p>They also got better at the conversation that happens after the analysis. The chart is the beginning, not the end. "Here's what the data shows, here's what I think it means, here's what I'd recommend we do, and here's what we'd need to believe for that recommendation to be wrong." That structure — analysis, interpretation, recommendation, uncertainty — became their core product.</p>
+
+      <p>AI made them faster at producing the analysis. It made the interpretation and recommendation part more important, not less. And they were ready for that.</p>
+
+      <h2>The New Baseline Skill Set</h2>
+
+      <p>If you're a data analyst in 2026 and you haven't automated your recurring work, you're leaving time on the table. If you can't use an AI tool to speed up exploratory analysis, you're slower than your peers. That's the new baseline — not the ceiling.</p>
+
+      <p>The ceiling is different now. It's the analyst who can look at an automated output, catch the thing the model missed, understand why the metric moved before anyone asks, walk into a room of senior stakeholders with a clear point of view, and leave with a decision made. That person is not being replaced. That person is more valuable than they've ever been.</p>
+
+      <h2>Back to Priya</h2>
+
+      <p>It's 10:15 AM. Priya has answered three questions. She opens a document she's been working on for two weeks — a proposal to restructure how her company measures customer lifetime value. The current metric is too simple, she thinks. It's leading the product team to optimize for the wrong things.</p>
+
+      <p>She didn't have time to think about this in 2022. She was too busy building Excel files. In 2025, this is her real job. And she's good at it.</p>
+
+      <p>That's the actual impact of AI on data analyst jobs. Not replacement. Reallocation. The question is what you do with the time that gets handed back to you.</p>
+
+    </article>
+
+    <!-- READ NEXT -->
+    <section class="read-next">
+      <p class="read-next-label">Read next</p>
+      <div class="read-next-grid">
+        <!-- Previous Project -->
+        <a href="analyst-to-data-scientist.html" class="read-next-card prev">
+          <span class="read-next-card-dir">
+            <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+            Previous
+          </span>
+          <span class="read-next-card-title">How a Data Analyst Can Move into Data Science</span>
+          <span class="read-next-card-cat">Career</span>
+        </a>
+        <!-- Next Project -->
+        <a href="why-n-minus-1-variance.html" class="read-next-card next">
+          <span class="read-next-card-dir">
+            Next
+            <svg viewBox="0 0 24 24"><path d="M4 13h12.17l-5.59 5.59L12 20l8-8-8-8-1.41 1.41L16.17 11H4v2z"/></svg>
+          </span>
+          <span class="read-next-card-title">Why We Divide by n-1 in Sample Variance</span>
+          <span class="read-next-card-cat">Data Science</span>
+        </a>
+      </div>
+    </section>
+
+    <div class="post-footer">
+      <a href="../blog.html" class="post-back">
+        <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+        Back to Blog
+      </a>
+    </div>
+
+  </div>
+</main>
+
+<nav class="dock" id="bottom-dock">
+  <button class="dock-btn" onclick="window.location.href='../../index.html'" title="Home">
+    <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+  </button>
+  <button class="dock-btn on" onclick="window.location.href='../blog.html'" title="Blog">
+    <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+  </button>
+  <button class="dock-btn" onclick="window.location.href='../../index.html#projects'" title="Projects">
+    <svg viewBox="0 0 24 24"><path d="M3 3h8v8H3zm10 0h8v8h-8zM3 13h8v8H3zm10 0h8v8h-8z"/></svg>
+  </button>
+  <div class="dock-sep"></div>
+  <button class="dock-btn" onclick="window.location.href='../cli.html'" title="CLI Mode">
+    <svg viewBox="0 0 24 24"><path d="m8 5-1.5 1.5L11 11l-4.5 4.5L8 17l6-6zm5 10h6v2h-6z"/></svg>
+  </button>
+  <button class="dock-btn" onclick="toggleTheme()" title="Toggle theme"><span class="theme-icon"></span></button>
+</nav>
+
+<button class="search-float-btn" data-search-trigger title="Search (⌘K)">
+  <svg viewBox="0 0 24 24"><path d="M21 21l-4.35-4.35M16.65 16.65A7.5 7.5 0 1 0 2 9.5a7.5 7.5 0 0 0 14.65 7.15z" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+  Search <span class="search-inp-kbd">⌘K</span>
+</button>
+
+<div class="search-overlay" id="search-overlay">
+  <div class="search-box">
+    <div class="search-input-row">
+      <svg viewBox="0 0 24 24"><path d="M21 21l-4.35-4.35M16.65 16.65A7.5 7.5 0 1 0 2 9.5a7.5 7.5 0 0 0 14.65 7.15z" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+      <input id="search-inp" class="search-inp" type="text" placeholder="Type a command or search..." autocomplete="off" spellcheck="false" />
+      <button class="search-close-btn" type="button" aria-label="Close search">×</button>
+      <span class="search-inp-kbd">ESC</span>
+    </div>
+    <div class="search-results" id="search-results"></div>
+    <div class="search-footer">
+      <span class="search-footer-kbd">↑↓</span> navigate &nbsp;
+      <span class="search-footer-kbd">↵</span> select &nbsp;
+      <span class="search-footer-kbd">ESC</span> close
+    </div>
+  </div>
+</div>
+
+<script src="../../js/main.js"></script>
+</body>
+</html>

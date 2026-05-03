@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How a Data Analyst Can Move into Data Science — Saurabh</title>
+  <meta name="description" content="A practical, honest roadmap for data analysts who want to transition into data science — what skills to build, in what order, and how to leverage what you already know." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="../../css/post.css" />
+  <script>(function(){const t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();</script>
+</head>
+<body>
+
+<nav class="top-nav" id="top-nav">
+  <div class="wrap nav-row">
+    <a href="../../index.html" class="nav-logo" title="Home" aria-label="Home">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+    </a>
+    <button class="nav-btn nav-theme-mobile" onclick="toggleTheme()" title="Toggle theme"><span class="theme-icon"></span></button>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false"><span></span></button>
+    <div class="nav-right">
+      <a href="../blog.html" class="nav-link active">Blog</a>
+      <a href="../../index.html#projects" class="nav-link">Projects</a>
+      <a href="../../index.html#contact" class="nav-link">Contact</a>
+      <a href="../cli.html" class="nav-link" style="font-family:var(--f-mono);font-size:12px">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="m8 5-1.5 1.5L11 11l-4.5 4.5L8 17l6-6z"/><path d="M13 15h6v2h-6z"/></svg>CLI
+      </a>
+      <button class="nav-search-btn" data-search-trigger title="Search (⌘K)">
+        <svg viewBox="0 0 24 24"><path d="M21 21l-4.35-4.35M16.65 16.65A7.5 7.5 0 1 0 2 9.5a7.5 7.5 0 0 0 14.65 7.15z" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+        Search <span class="nav-search-kbd">⌘K</span>
+      </button>
+      <button class="nav-btn" onclick="toggleTheme()" title="Toggle theme"><span class="theme-icon"></span></button>
+    </div>
+  </div>
+  <div class="mobile-nav-panel" id="mobile-nav-panel" aria-hidden="true">
+    <a href="../blog.html" class="nav-link active">Blog</a>
+    <a href="../../index.html#projects" class="nav-link">Projects</a>
+    <a href="../../index.html#contact" class="nav-link">Contact</a>
+    <a href="../cli.html" class="nav-link" style="font-family:var(--f-mono);font-size:12px">CLI</a>
+    <button class="nav-search-btn" data-search-trigger>Search <span class="nav-search-kbd">⌘K</span></button>
+  </div>
+</nav>
+
+<main class="post-main">
+  <div class="post-wrap">
+
+    <a href="../blog.html" class="post-back">
+      <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+      Back to Blog
+    </a>
+
+    <header class="post-header">
+      <span class="post-cat">Career</span>
+      <h1 class="post-title">How a Data Analyst Can Move into Data Science</h1>
+      <div class="post-meta">
+        <span>May 3, 2026</span>
+        <span class="post-meta-dot">·</span>
+        <span>9 min read</span>
+        <span class="post-meta-dot">·</span>
+        <span>Saurabh</span>
+      </div>
+    </header>
+
+    <article class="post-body">
+
+      <p>Most transition guides start with a list of things you don't know. "Learn Python. Learn machine learning. Learn statistics. Learn deep learning." The list is long and intimidating and makes the move feel like starting over from zero.</p>
+
+      <p>You're not starting from zero. That framing is wrong. Let me show you what you actually have, what's genuinely missing, and how to build the bridge in a sequence that makes sense.</p>
+
+      <figure class="post-img-wrap">
+        <img src="../../assets/analyst-to-data-scientist.svg" alt="Roadmap showing the journey from data analyst to data scientist across four phases: statistics, Python for ML, core modeling, and portfolio building over 7-9 months" class="post-img" />
+        <figcaption class="post-img-caption">The 7–9 month roadmap. Each phase builds directly on the last — and on what you already know as an analyst.</figcaption>
+      </figure>
+
+      <h2>What You Already Have (That Most Guides Ignore)</h2>
+
+      <p>As a data analyst, you have things that CS graduates and bootcamp completers usually don't.</p>
+
+      <p><strong>SQL fluency.</strong> Real SQL fluency — not just SELECT statements, but window functions, CTEs, subqueries, performance awareness. Most data scientists are weak at SQL. You're not. This matters more than you think, because almost every real ML project starts with data extraction and transformation, and that's SQL.</p>
+
+      <p><strong>Business context.</strong> You understand what a metric actually means in the real world. You know why the denominator matters. You know which numbers the CEO looks at and which ones are vanity metrics. A model is only valuable if it connects to a decision — and you understand decisions in a way that pure technical people often don't.</p>
+
+      <p><strong>Data intuition.</strong> You've spent hundreds of hours looking at data. You know when a number smells wrong. You know which distributions are plausible and which aren't. This intuition — the ability to sanity-check a model's output — is genuinely hard to develop and you already have it.</p>
+
+      <p><strong>Stakeholder communication.</strong> You can explain a finding to someone who doesn't care about the technical details. This is, quietly, one of the most important skills in data science and most practitioners are mediocre at it.</p>
+
+      <h2>What's Actually Missing</h2>
+
+      <p>Be honest with yourself about the gaps. They're real but they're specific — not everything.</p>
+
+      <p>The first gap is <strong>statistical depth</strong>. You probably know enough statistics to do your analyst job — means, distributions, maybe some hypothesis testing. But data science requires understanding probability distributions deeply, maximum likelihood estimation, Bayesian reasoning, and the statistical assumptions that underlie every model you'll use. When your model is wrong, you need to know why statistically, not just empirically.</p>
+
+      <p>The second gap is <strong>Python for modeling</strong>. You might already use Python for data work. But scikit-learn, model pipelines, cross-validation, hyperparameter tuning, feature engineering as code, and model serialization are a specific skill set within Python that analysts rarely need. This is learnable — probably the most learnable gap on the list.</p>
+
+      <p>The third gap is <strong>modeling intuition</strong>. Knowing which algorithm to try for which problem. Understanding the bias-variance tradeoff. Knowing when a Random Forest is overkill and when XGBoost is the right call. Understanding what regularization is doing and when you need it. This comes from building models — not from reading about them.</p>
+
+      <h2>Phase 1 (Months 1–2): Fill the Statistics Gap</h2>
+
+      <p>Don't skip this. The temptation is to jump straight into scikit-learn tutorials and start fitting models. Resist it. Without statistical grounding, you'll be able to run models but not trust or explain them — which makes you dangerous rather than useful.</p>
+
+      <p>What to cover: probability distributions (normal, binomial, Poisson — when each applies and why), hypothesis testing and p-values (properly understood, not cargo-culted), confidence intervals, Bayesian basics (prior, likelihood, posterior — even a shallow understanding pays dividends), and the Central Limit Theorem (genuinely understand it, don't just know the name).</p>
+
+      <p>Best resources: StatQuest with Josh Starmer on YouTube is the single best resource for building statistical intuition without drowning in proofs. Seeing Theory (seeing-theory.brown.edu) is a visual introduction that makes distributions and inference tangible. Use these alongside a lightweight textbook — "Statistics" by Freedman, Pisani & Purves if you want intuition-first, or "All of Statistics" by Wasserman if you want rigour.</p>
+
+      <h2>Phase 2 (Months 3–4): Python for Machine Learning</h2>
+
+      <p>You probably know Pandas and NumPy at a working level. Deepen both — there are Pandas patterns (groupby transforms, pivot operations, memory-efficient dtypes) and NumPy operations (broadcasting, vectorization) that become important at model scale. Then move into scikit-learn seriously.</p>
+
+      <pre><code>from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler, OneHotEncoder
+from sklearn.compose import ColumnTransformer
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import cross_val_score
+
+# The right way to build a modeling pipeline
+numeric_features = ['age', 'salary', 'tenure']
+categorical_features = ['department', 'region']
+
+preprocessor = ColumnTransformer([
+    ('num', StandardScaler(), numeric_features),
+    ('cat', OneHotEncoder(handle_unknown='ignore'), categorical_features)
+])
+
+pipeline = Pipeline([
+    ('preprocessor', preprocessor),
+    ('classifier', RandomForestClassifier(n_estimators=100, random_state=42))
+])
+
+# Proper evaluation — not train/test split alone
+scores = cross_val_score(pipeline, X, y, cv=5, scoring='roc_auc')
+print(f"AUC: {scores.mean():.3f} ± {scores.std():.3f}")</code></pre>
+
+      <p>Learn pipelines from day one. Analysts who learn scikit-learn without pipelines build models they can't deploy or reproduce. Pipelines are how real ML code is written — preprocessing and modeling together, reproducible, serializable, testable.</p>
+
+      <p>Resources: Kaggle Learn (free, practical, uses real datasets), fast.ai Part 1 (excellent for building intuition about what models are actually doing), and the scikit-learn documentation itself (unusually good for a technical library).</p>
+
+      <h2>Phase 3 (Months 5–6): Build Core Modeling Depth</h2>
+
+      <p>Work through the core algorithm families in depth: linear and logistic regression (understand them mathematically — they're the foundation everything else builds on), decision trees and ensembles (Random Forest, Gradient Boosting, XGBoost — know when each is appropriate and why), clustering (K-Means, DBSCAN, hierarchical — and how to validate unsupervised results), and dimensionality reduction (PCA for preprocessing, UMAP for visualization).</p>
+
+      <p>For each algorithm, go through the same checklist: What problem is it solving? What assumptions does it make? What does it do when those assumptions are violated? How do I tune it? How do I know if it's working?</p>
+
+      <pre><code>import xgboost as xgb
+from sklearn.model_selection import RandomizedSearchCV
+
+# XGBoost with proper hyperparameter search
+param_grid = {
+    'n_estimators': [100, 300, 500],
+    'max_depth': [3, 5, 7],
+    'learning_rate': [0.01, 0.05, 0.1],
+    'subsample': [0.7, 0.9, 1.0],
+    'colsample_bytree': [0.7, 0.9, 1.0],
+    'reg_alpha': [0, 0.1, 1.0],
+    'reg_lambda': [1.0, 2.0, 5.0]
+}
+
+model = xgb.XGBClassifier(random_state=42, eval_metric='logloss')
+search = RandomizedSearchCV(model, param_grid, n_iter=30, cv=5,
+                            scoring='roc_auc', n_jobs=-1, random_state=42)
+search.fit(X_train, y_train)
+print(f"Best AUC: {search.best_score_:.4f}")
+print(f"Best params: {search.best_params_}")</code></pre>
+
+      <p>The book for this phase is "Hands-On Machine Learning with Scikit-Learn, Keras & TensorFlow" by Aurélien Géron. Read Chapters 1–9 (the ML fundamentals, not the deep learning chapters). It's the single best practical ML book written.</p>
+
+      <h2>Phase 4 (Months 7–9): Portfolio and Job Search</h2>
+
+      <p>Two to three end-to-end projects, publicly on GitHub, with write-ups. Not tutorials. Not notebooks with cells run top to bottom. Projects with a clear problem statement, a dataset you had to wrangle, modeling decisions you made and can explain, results you can interpret, and code that is clean and reproducible.</p>
+
+      <p>The projects that work best for analysts transitioning are ones that combine your existing domain knowledge with new ML techniques. If you've worked in e-commerce, build a churn prediction model on customer data. If you've worked in finance, build a risk classification system. The combination of domain understanding and ML application is more impressive than a generic Titanic classifier.</p>
+
+      <p>On job titles: don't go directly for "Data Scientist" in your first application. Target "Analytics Engineer," "ML Engineer — Analytics," or "Senior Data Analyst (ML-focused)" first. These roles value your existing skills heavily, give you room to deepen ML, and will get you into an environment where you're working alongside data scientists — the fastest way to grow.</p>
+
+      <h2>The Honest Timeline</h2>
+
+      <p>Seven to nine months of serious part-time work (two to three hours on weekdays, longer on weekends) gets most analysts to a point where they can interview credibly for junior data science roles. "Serious" means actually writing code, not watching videos. The transition is realistic — people do it regularly. It's not fast, and it requires sustained effort. But you're not climbing a mountain from sea level. You're already at base camp.</p>
+
+      <h2>One Last Thing</h2>
+
+      <p>The analysts who make this transition successfully aren't the ones who learned the most algorithms. They're the ones who kept building projects, writing about what they learned, and putting their work in public — even when it was imperfect. Imperfect public work beats perfect private work every single time when it comes to getting hired.</p>
+
+      <p>Start with what you have. Build in the gaps. Ship the work. That's the whole plan.</p>
+
+    </article>
+
+    <!-- READ NEXT -->
+    <section class="read-next">
+      <p class="read-next-label">Read next</p>
+      <div class="read-next-grid">
+        <!-- Previous Project -->
+        <a href="future-of-data-analytics.html" class="read-next-card prev">
+          <span class="read-next-card-dir">
+            <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+            Previous
+          </span>
+          <span class="read-next-card-title">The Future of Data Analytics</span>
+          <span class="read-next-card-cat">Data Analytics</span>
+        </a>
+        <!-- Next Project -->
+        <a href="student-lifestyle-analysis.html" class="read-next-card next">
+          <span class="read-next-card-dir">
+            Next
+            <svg viewBox="0 0 24 24"><path d="M4 13h12.17l-5.59 5.59L12 20l8-8-8-8-1.41 1.41L16.17 11H4v2z"/></svg>
+          </span>
+          <span class="read-next-card-title">The Impact of AI on Data Analyst Jobs</span>
+          <span class="read-next-card-cat">AI</span>
+        </a>
+      </div>
+    </section>
+
+    <div class="post-footer">
+      <a href="../blog.html" class="post-back">
+        <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+        Back to Blog
+      </a>
+    </div>
+
+  </div>
+</main>
+
+<nav class="dock" id="bottom-dock">
+  <button class="dock-btn" onclick="window.location.href='../../index.html'" title="Home">
+    <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+  </button>
+  <button class="dock-btn on" onclick="window.location.href='../blog.html'" title="Blog">
+    <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+  </button>
+  <button class="dock-btn" onclick="window.location.href='../../index.html#projects'" title="Projects">
+    <svg viewBox="0 0 24 24"><path d="M3 3h8v8H3zm10 0h8v8h-8zM3 13h8v8H3zm10 0h8v8h-8z"/></svg>
+  </button>
+  <div class="dock-sep"></div>
+  <button class="dock-btn" onclick="window.location.href='../cli.html'" title="CLI Mode">
+    <svg viewBox="0 0 24 24"><path d="m8 5-1.5 1.5L11 11l-4.5 4.5L8 17l6-6zm5 10h6v2h-6z"/></svg>
+  </button>
+  <button class="dock-btn" onclick="toggleTheme()" title="Toggle theme"><span class="theme-icon"></span></button>
+</nav>
+
+<button class="search-float-btn" data-search-trigger title="Search (⌘K)">
+  <svg viewBox="0 0 24 24"><path d="M21 21l-4.35-4.35M16.65 16.65A7.5 7.5 0 1 0 2 9.5a7.5 7.5 0 0 0 14.65 7.15z" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+  Search <span class="search-inp-kbd">⌘K</span>
+</button>
+
+<div class="search-overlay" id="search-overlay">
+  <div class="search-box">
+    <div class="search-input-row">
+      <svg viewBox="0 0 24 24"><path d="M21 21l-4.35-4.35M16.65 16.65A7.5 7.5 0 1 0 2 9.5a7.5 7.5 0 0 0 14.65 7.15z" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+      <input id="search-inp" class="search-inp" type="text" placeholder="Type a command or search..." autocomplete="off" spellcheck="false" />
+      <button class="search-close-btn" type="button" aria-label="Close search">×</button>
+      <span class="search-inp-kbd">ESC</span>
+    </div>
+    <div class="search-results" id="search-results"></div>
+    <div class="search-footer">
+      <span class="search-footer-kbd">↑↓</span> navigate &nbsp;
+      <span class="search-footer-kbd">↵</span> select &nbsp;
+      <span class="search-footer-kbd">ESC</span> close
+    </div>
+  </div>
+</div>
+
+<script src="../../js/main.js"></script>
+</body>
+</html>

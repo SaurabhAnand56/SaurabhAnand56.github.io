@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Why We Divide by n-1 in Sample Variance — Saurabh</title>
+  <meta name="description" content="An intuitive explanation of Bessel's correction — why dividing by n-1 instead of n gives you a better estimate of population variance from a sample." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="../../css/post.css" />
+  <script>(function(){const t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();</script>
+</head>
+<body>
+
+<nav class="top-nav" id="top-nav">
+  <div class="wrap nav-row">
+    <a href="../../index.html" class="nav-logo" title="Home" aria-label="Home">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+    </a>
+    <button class="nav-btn nav-theme-mobile" onclick="toggleTheme()" title="Toggle theme"><span class="theme-icon"></span></button>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false"><span></span></button>
+    <div class="nav-right">
+      <a href="../blog.html" class="nav-link active">Blog</a>
+      <a href="../../index.html#projects" class="nav-link">Projects</a>
+      <a href="../../index.html#contact" class="nav-link">Contact</a>
+      <a href="../cli.html" class="nav-link" style="font-family:var(--f-mono);font-size:12px">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="m8 5-1.5 1.5L11 11l-4.5 4.5L8 17l6-6z"/><path d="M13 15h6v2h-6z"/></svg>CLI
+      </a>
+      <button class="nav-search-btn" data-search-trigger title="Search (⌘K)">
+        <svg viewBox="0 0 24 24"><path d="M21 21l-4.35-4.35M16.65 16.65A7.5 7.5 0 1 0 2 9.5a7.5 7.5 0 0 0 14.65 7.15z" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+        Search <span class="nav-search-kbd">⌘K</span>
+      </button>
+      <button class="nav-btn" onclick="toggleTheme()" title="Toggle theme"><span class="theme-icon"></span></button>
+    </div>
+  </div>
+  <div class="mobile-nav-panel" id="mobile-nav-panel" aria-hidden="true">
+    <a href="../blog.html" class="nav-link active">Blog</a>
+    <a href="../../index.html#projects" class="nav-link">Projects</a>
+    <a href="../../index.html#contact" class="nav-link">Contact</a>
+    <a href="../cli.html" class="nav-link" style="font-family:var(--f-mono);font-size:12px">CLI</a>
+    <button class="nav-search-btn" data-search-trigger>Search <span class="nav-search-kbd">⌘K</span></button>
+  </div>
+</nav>
+
+<main class="post-main">
+  <div class="post-wrap">
+
+    <a href="../blog.html" class="post-back">
+      <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+      Back to Blog
+    </a>
+
+    <header class="post-header">
+      <span class="post-cat">Data Science</span>
+      <h1 class="post-title">Why We Divide by n-1 in Sample Variance</h1>
+      <div class="post-meta">
+        <span>May 3, 2026</span>
+        <span class="post-meta-dot">·</span>
+        <span>7 min read</span>
+        <span class="post-meta-dot">·</span>
+        <span>Saurabh</span>
+      </div>
+    </header>
+
+    <article class="post-body">
+
+      <p>At some point every statistics student types <code>np.var(data)</code>, then <code>np.var(data, ddof=1)</code>, notices the numbers are different, and wonders what <code>ddof=1</code> actually means and why it exists. The answer is one of those beautiful moments where a small formula change connects to a deep idea about what it means to estimate something you can never fully see.</p>
+
+      <h2>Start With the Simplest Question</h2>
+      <p>You want to know the average height of every person in India. You can't measure all 1.4 billion people. So you measure 100 of them — your <strong>sample</strong> — and use that to estimate the truth about the <strong>population</strong>.</p>
+      <p>That's statistics in one sentence: using a small window to make careful guesses about a big world you can't fully observe.</p>
+      <p>Variance is how we measure spread — how far data points are from the average. And when we compute variance from a sample, something subtle goes wrong if we're not careful.</p>
+
+      <h2>The Intuition: Your Sample Mean Is Not the True Mean</h2>
+      <p>Here's the key insight, stated plainly: <strong>when you take a sample, the sample mean (x̄) is almost never exactly equal to the true population mean (μ).</strong> It's always a little off — sometimes above, sometimes below.</p>
+      <p>Now think about what happens when you calculate variance. You measure how far each point is from the mean. But which mean are you using? You're using x̄ — your sample mean — not the real μ.</p>
+      <p>And here's the problem: your data points are naturally closer to their own sample mean than they are to the true population mean. The sample mean is literally defined as the center of your sample. So when you measure deviations from it, you're measuring the smallest possible deviations — artificially small ones.</p>
+      <p>Dividing those artificially small deviations by n gives you a variance that is <strong>systematically too low</strong>. It consistently underestimates how spread out the population truly is.</p>
+
+      <figure class="post-img-wrap">
+        <img src="../../assets/why-n-minus-1-variance.svg" alt="Diagram comparing population variance calculated with N versus sample variance corrected with n-1, showing how sample deviations from the sample mean are smaller than true deviations from the population mean" class="post-img" />
+        <figcaption class="post-img-caption">Left: population — divide by N, exact answer. Right: sample — x̄ ≠ μ, so deviations are too small, and dividing by n-1 corrects upward.</figcaption>
+      </figure>
+
+      <h2>A Concrete Example</h2>
+      <p>Suppose the true population is five numbers: 2, 4, 6, 8, 10. The true mean is 6. The true variance is:</p>
+
+      <pre><code>population = [2, 4, 6, 8, 10]
+true_mean = 6
+deviations_squared = [(x - 6)**2 for x in population]
+# = [16, 4, 0, 4, 16]
+
+true_variance = sum(deviations_squared) / 5
+# = 40 / 5 = 8.0</code></pre>
+
+      <p>Now suppose you only see three of those five values: 2, 4, 8. Your sample mean is (2+4+8)/3 = 4.67 — already off from the true mean of 6.</p>
+
+      <pre><code>sample = [2, 4, 8]
+sample_mean = sum(sample) / len(sample)  # = 4.67
+
+# Deviations from sample mean (not true mean!)
+deviations_sq = [(x - sample_mean)**2 for x in sample]
+# = [7.11, 0.44, 11.11]
+# Sum = 18.67
+
+# WRONG: divide by n
+biased_variance = 18.67 / 3   # = 6.22  ← underestimates true 8.0
+
+# RIGHT: divide by n-1
+unbiased_variance = 18.67 / 2  # = 9.33  ← much closer to true 8.0</code></pre>
+
+      <p>The biased estimate (6.22) is further from the truth (8.0) than the corrected one (9.33). The n-1 correction isn't perfect for any single sample — but it is correct <em>on average</em> across many samples. That's what unbiased means in statistics: not that each estimate is right, but that the errors cancel out over repeated sampling.</p>
+
+      <h2>The Degrees of Freedom Explanation</h2>
+      <p>There's another way to understand this that some people find more satisfying. It's called <strong>degrees of freedom</strong>.</p>
+      <p>Suppose you have a sample of 3 numbers and you know the sample mean is 10. How many of those numbers are you free to choose?</p>
+      <p>You can pick the first one freely: say, 8. You can pick the second one freely: say, 12. But the third one? It's forced. If the mean must be 10, and you have 8 and 12 already, the third number must be 10. You have no freedom left.</p>
+      <p>With n data points and one constraint (the mean), you have <strong>n-1 degrees of freedom</strong>. When calculating variance, you're dividing by the number of truly independent pieces of information — and that's n-1, not n.</p>
+
+      <pre><code>import numpy as np
+
+data = [8, 12, 10]  # mean = 10
+
+# If mean is fixed at 10 and first two values are 8, 12:
+# third value is forced: 3*10 - 8 - 12 = 10
+# Only 2 values were "free" — that's n-1
+
+print(np.var(data))        # biased:   divides by n=3    → 2.67
+print(np.var(data, ddof=1)) # unbiased: divides by n-1=2  → 4.00</code></pre>
+
+      <h2>When Does It Matter?</h2>
+      <p>For large samples, the difference between dividing by n and n-1 becomes negligible. If n = 1000, dividing by 999 vs 1000 is a 0.1% difference. Nobody cares.</p>
+      <p>But for small samples — n = 5, n = 10, n = 20 — the correction matters meaningfully. Medical trials, A/B tests with limited traffic, early-stage product experiments: these are exactly the contexts where you're working with small samples and the bias is real.</p>
+      <p>The extreme case makes it obvious: if n = 1, you have a single data point. Its deviation from itself is zero. Variance = 0. That's clearly wrong — one observation tells you nothing about population spread. With n-1, you'd divide by zero, which is Python's way of saying "you don't have enough information to estimate variance." That's the correct answer.</p>
+
+      <h2>Proving It With Simulation</h2>
+      <p>The cleanest way to understand why n-1 works is to simulate it — draw thousands of samples, compute variance both ways, and check which one averages to the true population variance.</p>
+
+      <pre><code>import numpy as np
+
+# True population: mean=50, std=10
+population = np.random.normal(loc=50, scale=10, size=100_000)
+true_var = np.var(population)  # ≈ 100.0
+
+biased_estimates = []
+unbiased_estimates = []
+
+for _ in range(10_000):
+    sample = np.random.choice(population, size=10, replace=False)
+    biased_estimates.append(np.var(sample))         # ddof=0
+    unbiased_estimates.append(np.var(sample, ddof=1))  # ddof=1
+
+print(f"True variance:              {true_var:.2f}")
+print(f"Average biased estimate:    {np.mean(biased_estimates):.2f}")   # ≈ 90
+print(f"Average unbiased estimate:  {np.mean(unbiased_estimates):.2f}") # ≈ 100</code></pre>
+
+      <p>Run this and you'll see: the biased estimates average to roughly 90 when the truth is 100. The unbiased estimates (ddof=1) average right to 100. That's Bessel's correction doing its job across 10,000 trials.</p>
+
+      <h2>The Name: Bessel's Correction</h2>
+      <p>The fix is formally called <strong>Bessel's correction</strong>, named after Friedrich Bessel, a 19th-century German mathematician. It's one of those results that feels obvious in hindsight but took real mathematical insight to derive rigorously — the proof that E[s²] = σ² (the expected value of the sample variance equals the true population variance) requires working through the algebra of expectations carefully.</p>
+      <p>You don't need to follow every step of that proof to use the result correctly. But it's worth knowing the name, because "Bessel's correction" is what statisticians say when they mean "that's why it's n-1."</p>
+
+      <h2>The One-Line Summary</h2>
+      <p>Your sample mean is always a little wrong. That wrongness makes your deviations look smaller than they really are. Dividing by n-1 instead of n corrects for this — inflating the estimate just enough to make it accurate on average. The n-1 represents the degrees of freedom: how many data points are truly free to vary once you've fixed the mean.</p>
+      <p>Now you know what <code>ddof=1</code> means — and more importantly, why.</p>
+
+    </article>
+
+    <!-- READ NEXT -->
+    <section class="read-next">
+      <p class="read-next-label">Read next</p>
+      <div class="read-next-grid">
+        <!-- Previous Project -->
+        <a href="ai-impact-data-analyst-jobs.html" class="read-next-card prev">
+          <span class="read-next-card-dir">
+            <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+            Previous
+          </span>
+          <span class="read-next-card-title">The Impact of AI on Data Analyst Jobs</span>
+          <span class="read-next-card-cat">AI</span>
+        </a>
+        <!-- Next Project -->
+        <a href="revenue-leakage-detection.html" class="read-next-card next">
+          <span class="read-next-card-dir">
+            Next
+            <svg viewBox="0 0 24 24"><path d="M4 13h12.17l-5.59 5.59L12 20l8-8-8-8-1.41 1.41L16.17 11H4v2z"/></svg>
+          </span>
+          <span class="read-next-card-title">Revenue Leakage Detection & Pricing Optimization for E-Commerce</span>
+          <span class="read-next-card-cat">Projects</span>
+        </a>
+      </div>
+    </section>
+
+    <div class="post-footer">
+      <a href="../blog.html" class="post-back">
+        <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+        Back to Blog
+      </a>
+    </div>
+
+  </div>
+</main>
+
+<nav class="dock" id="bottom-dock">
+  <button class="dock-btn" onclick="window.location.href='../../index.html'" title="Home">
+    <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+  </button>
+  <button class="dock-btn on" onclick="window.location.href='../blog.html'" title="Blog">
+    <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+  </button>
+  <button class="dock-btn" onclick="window.location.href='../../index.html#projects'" title="Projects">
+    <svg viewBox="0 0 24 24"><path d="M3 3h8v8H3zm10 0h8v8h-8zM3 13h8v8H3zm10 0h8v8h-8z"/></svg>
+  </button>
+  <div class="dock-sep"></div>
+  <button class="dock-btn" onclick="window.location.href='../cli.html'" title="CLI Mode">
+    <svg viewBox="0 0 24 24"><path d="m8 5-1.5 1.5L11 11l-4.5 4.5L8 17l6-6zm5 10h6v2h-6z"/></svg>
+  </button>
+  <button class="dock-btn" onclick="toggleTheme()" title="Toggle theme"><span class="theme-icon"></span></button>
+</nav>
+
+<button class="search-float-btn" data-search-trigger title="Search (⌘K)">
+  <svg viewBox="0 0 24 24"><path d="M21 21l-4.35-4.35M16.65 16.65A7.5 7.5 0 1 0 2 9.5a7.5 7.5 0 0 0 14.65 7.15z" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+  Search <span class="search-inp-kbd">⌘K</span>
+</button>
+
+<div class="search-overlay" id="search-overlay">
+  <div class="search-box">
+    <div class="search-input-row">
+      <svg viewBox="0 0 24 24"><path d="M21 21l-4.35-4.35M16.65 16.65A7.5 7.5 0 1 0 2 9.5a7.5 7.5 0 0 0 14.65 7.15z" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+      <input id="search-inp" class="search-inp" type="text" placeholder="Type a command or search..." autocomplete="off" spellcheck="false" />
+      <button class="search-close-btn" type="button" aria-label="Close search">×</button>
+      <span class="search-inp-kbd">ESC</span>
+    </div>
+    <div class="search-results" id="search-results"></div>
+    <div class="search-footer">
+      <span class="search-footer-kbd">↑↓</span> navigate &nbsp;
+      <span class="search-footer-kbd">↵</span> select &nbsp;
+      <span class="search-footer-kbd">ESC</span> close
+    </div>
+  </div>
+</div>
+
+<script src="../../js/main.js"></script>
+</body>
+</html>

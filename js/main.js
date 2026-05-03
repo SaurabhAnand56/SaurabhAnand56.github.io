@@ -282,6 +282,9 @@ function initSearch() {
       el.addEventListener('mouseenter', () => {
         setActive(parseInt(el.dataset.idx));
       });
+      el.addEventListener('click', () => {
+        closeSearch();
+      });
     });
   }
 
