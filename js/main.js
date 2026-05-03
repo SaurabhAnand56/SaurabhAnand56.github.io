@@ -150,7 +150,10 @@ const SEARCH_INDEX = [
   { type: 'page', name: 'Contact', desc: 'Get in touch', rootHref: 'index.html#contact', icon: 'contact' },
   { type: 'page', name: 'CLI Mode', desc: 'Interactive terminal portfolio', rootHref: 'pages/cli.html', icon: 'cli' },
   // Blog posts
-  { type: 'post', name: 'The Future of Data Analytics', desc: 'AI · May 2, 2025', rootHref: 'pages/posts/future-of-data-analytics.html', tag: '8 min' },
+  { type: 'post', name: 'The Future of Data Analytics', desc: 'Data Analytics · May 2, 2025', rootHref: 'pages/posts/future-of-data-analytics.html', tag: '8 min' },
+  { type: 'post', name: 'Why We Divide by n-1 in Sample Variance', desc: 'Data Science · May 3, 2026', rootHref: 'pages/posts/why-n-minus-1-variance.html', tag: '7 min' },
+  { type: 'post', name: 'The Impact of AI on Data Analyst Jobs', desc: 'AI · May 3, 2026', rootHref: 'pages/posts/ai-impact-data-analyst-jobs.html', tag: '8 min' },
+  { type: 'post', name: 'How a Data Analyst Can Move into Data Science', desc: 'Career · May 3, 2026', rootHref: 'pages/posts/analyst-to-data-scientist.html', tag: '9 min' },
   { type: 'post', name: 'Netflix EDA Dashboard — Python, Power BI & Streamlit', desc: 'Projects · May 2, 2026', rootHref: 'pages/posts/netflix-eda-powerbi.html', tag: '8 min' },
   { type: 'post', name: 'AI-Powered SQL Business Intelligence Assistant', desc: 'Projects · Apr 27, 2026', rootHref: 'pages/posts/ai-sql-business-intelligence.html', tag: '9 min' },
   { type: 'post', name: 'Student Lifestyle & Academic Performance Analysis', desc: 'Projects · Apr 27, 2026', rootHref: 'pages/posts/student-lifestyle-analysis.html', tag: '10 min' },
