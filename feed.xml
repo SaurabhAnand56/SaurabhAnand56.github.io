@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Blog — Saurabh</title>
+    <link>https://saurabhanand56.github.io/pages/blog.html</link>
+    <description>Thoughts on web development, AI, and building software.</description>
+    <language>en-us</language>
+    <copyright>© 2026 Saurabh</copyright>
+    <lastBuildDate>Sat, 03 May 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://saurabhanand56.github.io/feed.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>How a Data Analyst Can Move into Data Science</title>
+      <link>https://saurabhanand56.github.io/pages/posts/analyst-to-data-scientist.html</link>
+      <guid>https://saurabhanand56.github.io/pages/posts/analyst-to-data-scientist.html</guid>
+      <pubDate>Sun, 03 May 2026 00:00:00 +0000</pubDate>
+      <category>Career</category>
+      <description><![CDATA[A practical, honest roadmap for analysts who want to transition — what skills to build, in what order, how to leverage what you already know, and why you're not starting from zero.]]></description>
+    </item>
+
+    <item>
+      <title>The Impact of AI on Data Analyst Jobs</title>
+      <link>https://saurabhanand56.github.io/pages/posts/ai-impact-data-analyst-jobs.html</link>
+      <guid>https://saurabhanand56.github.io/pages/posts/ai-impact-data-analyst-jobs.html</guid>
+      <pubDate>Sun, 03 May 2026 00:00:00 +0000</pubDate>
+      <category>AI</category>
+      <description><![CDATA[A story about what actually happened when AI entered the data analyst's workflow — what got automated, what didn't, who got hurt, and who got better.]]></description>
+    </item>
+
+    <item>
+      <title>Why We Divide by n-1 in Sample Variance</title>
+      <link>https://saurabhanand56.github.io/pages/posts/why-n-minus-1-variance.html</link>
+      <guid>https://saurabhanand56.github.io/pages/posts/why-n-minus-1-variance.html</guid>
+      <pubDate>Sun, 03 May 2026 00:00:00 +0000</pubDate>
+      <category>Data Science</category>
+      <description><![CDATA[An intuitive explanation of Bessel's correction — why your sample mean is always a little wrong, why that makes your variance too small, and how dividing by n-1 fixes it. With Python simulations.]]></description>
+    </item>
+
+    <item>
+      <title>Building the Netflix EDA Dashboard — Python, Power BI &amp; Streamlit</title>
+      <link>https://saurabhanand56.github.io/pages/posts/netflix-eda-powerbi.html</link>
+      <guid>https://saurabhanand56.github.io/pages/posts/netflix-eda-powerbi.html</guid>
+      <pubDate>Fri, 02 May 2026 00:00:00 +0000</pubDate>
+      <category>Projects</category>
+      <description><![CDATA[A complete Netflix content analysis: EDA on 8,800+ titles, a Power BI dashboard for business reporting, and a Streamlit app with content-based recommendations using TF-IDF similarity.]]></description>
+    </item>
+
+    <item>
+      <title>The Future of Data Analytics</title>
+      <link>https://saurabhanand56.github.io/pages/posts/future-of-data-analytics.html</link>
+      <guid>https://saurabhanand56.github.io/pages/posts/future-of-data-analytics.html</guid>
+      <pubDate>Fri, 02 May 2025 00:00:00 +0000</pubDate>
+      <category>Data Analytics</category>
+      <description><![CDATA[How real-time pipelines, AI-augmented analysis, the lakehouse architecture, and the metrics layer are reshaping what it means to work with data — and what analysts need to learn next.]]></description>
+    </item>
+
+    <item>
+      <title>Revenue Leakage Detection &amp; Pricing Optimization for E-Commerce</title>
+      <link>https://saurabhanand56.github.io/pages/posts/revenue-leakage-detection.html</link>
+      <guid>https://saurabhanand56.github.io/pages/posts/revenue-leakage-detection.html</guid>
+      <pubDate>Sun, 27 Apr 2026 00:00:00 +0000</pubDate>
+      <category>Projects</category>
+      <description><![CDATA[How I identified $9.54M in at-risk revenue across 47,000 products — surfacing discount abuse, pricing inefficiencies, and out-of-stock losses using Python, SQL, Tableau, and Streamlit.]]></description>
+    </item>
+
+    <item>
+      <title>Student Lifestyle &amp; Academic Performance Analysis — ML from EDA to Deployment</title>
+      <link>https://saurabhanand56.github.io/pages/posts/student-lifestyle-analysis.html</link>
+      <guid>https://saurabhanand56.github.io/pages/posts/student-lifestyle-analysis.html</guid>
+      <pubDate>Sun, 27 Apr 2026 00:00:00 +0000</pubDate>
+      <category>Projects</category>
+      <description><![CDATA[An end-to-end ML project predicting exam scores from lifestyle habits — sleep, study hours, social media, diet — with regression, classification, clustering, and a live Streamlit predictor.]]></description>
+    </item>
+
+    <item>
+      <title>Building an AI-Powered SQL Business Intelligence Assistant with Gemini</title>
+      <link>https://saurabhanand56.github.io/pages/posts/ai-sql-business-intelligence.html</link>
+      <guid>https://saurabhanand56.github.io/pages/posts/ai-sql-business-intelligence.html</guid>
+      <pubDate>Sun, 27 Apr 2026 00:00:00 +0000</pubDate>
+      <category>Projects</category>
+      <description><![CDATA[Ask a question in plain English, get SQL generated by Gemini AI, run it against a real database, and receive a chart plus a business insight — all in one Streamlit app.]]></description>
+    </item>
+
+  </channel>
+</rss>
