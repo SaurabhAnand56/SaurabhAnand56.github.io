@@ -1,14 +1,15 @@
 # Saurabh Portfolio
 
-A static portfolio website for a data analyst and blogger, built with HTML, CSS, and JavaScript.
+Personal static portfolio website for a data analyst and blogger.
+This repository contains only the public website source; local helper files such as a `tools/` folder are intentionally excluded from GitHub via `.gitignore`.
 
 The project includes:
 - a responsive homepage with project highlights and skills
 - a filterable blog page with post cards
 - a CLI-style terminal experience
-- dark/light theme toggle with persistence
-- search overlay for quick navigation
-- RSS feed generation from blog posts
+- a dark/light theme toggle persisted in the browser
+- a search overlay for quick navigation
+- a published RSS feed file (`feed.xml`)
 
 ## Project structure
 
@@ -20,14 +21,13 @@ portfolio/
 ├── js/
 │   └── main.js          ← theme, search, blog filter, CLI, scroll effects
 ├── pages/
-│   ├── blog.html        ← blog listing page with filters
+│   ├── blog.html        ← blog listing page with category filters
 │   ├── cli.html         ← interactive terminal portfolio
 │   └── posts/           ← individual blog post pages
 ├── feed.xml             ← RSS feed for blog subscribers
 ├── index.html           ← main portfolio landing page
 ├── README.md            ← this file
-└── tools/
-    └── generate_rss.py  ← script that builds `feed.xml` from `pages/blog.html`
+└── .gitignore           ← excludes local-only files like `tools/`
 ```
 
 ## Run locally
@@ -51,7 +51,7 @@ http://localhost:3000
 - **Search command palette** opened by `⌘K` / `Ctrl+K`
 - **Blog page with category filters** and post count tracking
 - **CLI page** with terminal-style interaction and custom commands
-- **RSS support** via `feed.xml` and `tools/generate_rss.py`
+- **RSS feed** file is published as `feed.xml`; helper scripts can be kept locally in an ignored `tools/` folder
 
 ## Editing content
 
@@ -73,11 +73,8 @@ Add or edit blog entries in `pages/blog.html`:
 
 ### RSS feed
 
-After changing blog posts, regenerate `feed.xml` with:
-
-```bash
-python tools/generate_rss.py
-```
+The published RSS feed is stored in `feed.xml`.
+If you keep a local `tools/` folder, it can contain a script for regenerating the feed, but that folder is not pushed to GitHub.
 
 ### CLI page
 
@@ -90,4 +87,4 @@ Replace `assets/photo1.png` and `assets/photo2.png` with your own profile images
 ## Notes
 
 - The site is fully static and can be hosted on GitHub Pages or any static hosting provider.
-- `feed.xml` is generated from the blog listing page content, so keep `pages/blog.html` up to date.
+- This repo intentionally keeps local helper files out of version control; only the public website files are committed.
