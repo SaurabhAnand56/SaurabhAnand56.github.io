@@ -1,61 +1,93 @@
 # Saurabh Portfolio
 
-A clean, minimal developer portfolio website with dark/light mode, a functional CLI terminal, and a separate blog page.
+A static portfolio website for a data analyst and blogger, built with HTML, CSS, and JavaScript.
 
-## File Structure
+The project includes:
+- a responsive homepage with project highlights and skills
+- a filterable blog page with post cards
+- a CLI-style terminal experience
+- dark/light theme toggle with persistence
+- search overlay for quick navigation
+- RSS feed generation from blog posts
+
+## Project structure
 
 ```
-saurabh-portfolio/
-├── index.html          ← Main portfolio page
+portfolio/
+├── assets/              ← profile photos and static image assets
 ├── css/
-│   └── style.css       ← All styles (dark/light tokens, components)
+│   └── style.css        ← layout, theme, responsive styles
 ├── js/
-│   └── main.js         ← Theme toggle, scroll dock, CLI, scroll reveal, search, blog modal
+│   └── main.js          ← theme, search, blog filter, CLI, scroll effects
 ├── pages/
-│   ├── blog.html       ← Blog listing page with tag filters + post modal
-│   └── cli.html        ← Interactive terminal portfolio
-├── assets/             ← Put your images here
-│   ├── photo1.jpg      ← Profile photo (static)
-│   └── photo2.jpg      ← Profile photo (hover/flip)
-└── README.md
+│   ├── blog.html        ← blog listing page with filters
+│   ├── cli.html         ← interactive terminal portfolio
+│   └── posts/           ← individual blog post pages
+├── feed.xml             ← RSS feed for blog subscribers
+├── index.html           ← main portfolio landing page
+├── README.md            ← this file
+└── tools/
+    └── generate_rss.py  ← script that builds `feed.xml` from `pages/blog.html`
 ```
 
-## Getting Started
+## Run locally
+
+Serve the folder over HTTP and open it in a browser. Example:
 
 ```bash
-python3 -m http.server 3000
-# or
-npx serve .
+python -m http.server 3000
 ```
 
-Open `http://localhost:3000` in your browser.
+Then visit:
 
-## Features
-
-- **Search** — Press `⌘K` (or `Ctrl+K`) to open the command palette. Searches across pages, blog posts, skills, and social links.
-- **Blog modal** — Click any blog post to read it in a full-page modal overlay.
-- **CLI** — Type `help` to see commands. No auto-output on load.
-- **ASCII art** — SAURABH CLI displayed on a single row in the terminal.
-- **Dark/Light theme** — Persisted across sessions.
-
-## Customizing
-
-### 1. Your Info (index.html)
-- Replace name, bio, and social links
-- Update work experience, projects, education
-
-### 2. Profile Photos
-Add two photos to `/assets/`, then in `index.html` replace the `.avatar-placeholder` divs:
-```html
-<img src="../assets/photo1.jpg" alt="Your Name">
+```text
+http://localhost:3000
 ```
 
-### 3. Blog Posts (pages/blog.html + js/main.js)
-- Add `.blog-item` blocks in `blog.html` with a unique `data-key`
-- Add matching entry in `BLOG_POSTS` object in `main.js`
+## Key features
 
-### 4. Search Index (js/main.js)
-- Extend `SEARCH_INDEX` array to add new pages, posts, or skills
+- **Responsive portfolio homepage** with hero section, skills, projects, and contact links
+- **Dark / light theme toggle** saved in `localStorage`
+- **Search command palette** opened by `⌘K` / `Ctrl+K`
+- **Blog page with category filters** and post count tracking
+- **CLI page** with terminal-style interaction and custom commands
+- **RSS support** via `feed.xml` and `tools/generate_rss.py`
 
-### 5. CLI Commands (js/main.js)
-- Update `CLI_DATA` object with your real info
+## Editing content
+
+### Homepage
+
+Update `index.html` to change:
+- hero text and biography
+- social links
+- featured project cards
+- skill tags
+- contact section
+
+### Blog
+
+Add or edit blog entries in `pages/blog.html`:
+- each post is an `<a class="blog-item" ...>` block
+- update title, category, excerpt, and date
+- point the link to the corresponding file in `pages/posts/`
+
+### RSS feed
+
+After changing blog posts, regenerate `feed.xml` with:
+
+```bash
+python tools/generate_rss.py
+```
+
+### CLI page
+
+Edit `pages/cli.html` and `js/main.js` to change the terminal experience, available commands, and output text.
+
+## Customize assets
+
+Replace `assets/photo1.png` and `assets/photo2.png` with your own profile images.
+
+## Notes
+
+- The site is fully static and can be hosted on GitHub Pages or any static hosting provider.
+- `feed.xml` is generated from the blog listing page content, so keep `pages/blog.html` up to date.
