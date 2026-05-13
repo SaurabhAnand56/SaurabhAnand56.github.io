@@ -200,7 +200,7 @@ body::after{
 
 /* ── PROFILE FLIP CARD ── */
 .flip-wrap{
-  position:relative;width:68px;height:68px;
+  position:relative;width:86px;height:86px;
   flex-shrink:0;perspective:700px;
 }
 .flip-inner{
@@ -498,7 +498,7 @@ footer{border-top:1px solid var(--border);padding:40px 0;margin-top:40px}
 }
 .blog-excerpt{
   font-size:13px;color:var(--text2);line-height:1.6;
-  display:-webkit-box;-webkit-line-clamp:2;
+  display:-webkit-box;line-clamp:2;-webkit-line-clamp:2;
   -webkit-box-orient:vertical;overflow:hidden;
 }
 .blog-r{
@@ -722,8 +722,10 @@ footer{border-top:1px solid var(--border);padding:40px 0;margin-top:40px}
 
 /* ── RESPONSIVE ── */
 @media(max-width:580px){
+  .hero{padding-bottom:30px}
   .hero-top{flex-direction:column-reverse}
-  .flip-wrap{width:58px;height:58px}
+  .hero + .wrap .sec-divider:first-child{margin:32px 0}
+  .flip-wrap{width:82px;height:82px}
   .proj-grid{grid-template-columns:1fr}
   .nav-right{display:none}
   .nav-toggle{display:flex}

@@ -141,6 +141,7 @@
   object-fit: cover;
   max-height: 480px;
   transition: transform .4s ease;
+  cursor: zoom-in;
 }
 
 .post-img-wrap:hover .post-img {
@@ -166,6 +167,84 @@
 
 /* Clearfix for floated images */
 .post-body::after { content: ''; display: table; clear: both; }
+
+/* ── IMAGE LIGHTBOX ── */
+.post-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(0, 0, 0, .82);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .22s ease;
+}
+
+.post-lightbox.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.post-lightbox-inner {
+  position: relative;
+  max-width: min(1120px, 94vw);
+  max-height: 90vh;
+  transform: scale(.96);
+  transition: transform .22s ease;
+}
+
+.post-lightbox.open .post-lightbox-inner {
+  transform: scale(1);
+}
+
+.post-lightbox-img {
+  display: block;
+  max-width: 100%;
+  max-height: 82vh;
+  width: auto;
+  height: auto;
+  border-radius: 12px;
+  background: var(--bg3);
+  box-shadow: 0 28px 90px rgba(0, 0, 0, .45);
+  cursor: default;
+}
+
+.post-lightbox-caption {
+  max-width: 760px;
+  margin: 12px auto 0;
+  text-align: center;
+  font-family: var(--f-mono);
+  font-size: 11.5px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, .68);
+}
+
+.post-lightbox-close {
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, .16);
+  background: rgba(255, 255, 255, .08);
+  color: rgba(255, 255, 255, .78);
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+  transition: background .2s, color .2s, border-color .2s;
+}
+
+.post-lightbox-close:hover {
+  background: rgba(255, 255, 255, .14);
+  color: #fff;
+  border-color: rgba(255, 255, 255, .28);
+}
 
 /* ── FOOTER ── */
 .post-footer {
@@ -253,6 +332,9 @@
   .post-body pre code { font-size: 12px; }
   .post-img-wrap.img-left, .post-img-wrap.img-right { float: none; max-width: 100%; margin: 1.6em 0; }
   .post-img-wrap.img-small { max-width: 100%; }
+  .post-lightbox { padding: 14px; }
+  .post-lightbox-img { max-height: 78vh; border-radius: 10px; }
+  .post-lightbox-close { top: 12px; right: 12px; }
   .read-next-grid { grid-template-columns: 1fr; }
   .read-next-card.next { align-items: flex-start; text-align: left; }
 }

@@ -128,6 +128,66 @@ function initBlogFilter() {
   });
 }
 
+/* ── POST IMAGE LIGHTBOX ── */
+function initPostImageLightbox() {
+  const postImages = document.querySelectorAll('.post-body .post-img');
+  if (!postImages.length) return;
+
+  const lightbox = document.createElement('div');
+  lightbox.className = 'post-lightbox';
+  lightbox.setAttribute('aria-hidden', 'true');
+  lightbox.innerHTML = `
+    <button class="post-lightbox-close" type="button" aria-label="Close image preview">&times;</button>
+    <div class="post-lightbox-inner" role="dialog" aria-modal="true" aria-label="Image preview">
+      <img class="post-lightbox-img" alt="" />
+      <div class="post-lightbox-caption"></div>
+    </div>
+  `;
+  document.body.appendChild(lightbox);
+
+  const imgEl = lightbox.querySelector('.post-lightbox-img');
+  const captionEl = lightbox.querySelector('.post-lightbox-caption');
+  const closeBtn = lightbox.querySelector('.post-lightbox-close');
+
+  function openLightbox(img) {
+    const caption = img.closest('.post-img-wrap')?.querySelector('.post-img-caption')?.textContent?.trim() || '';
+    imgEl.src = img.currentSrc || img.src;
+    imgEl.alt = img.alt || '';
+    captionEl.textContent = caption;
+    captionEl.style.display = caption ? 'block' : 'none';
+    lightbox.classList.add('open');
+    lightbox.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    closeBtn.focus();
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove('open');
+    lightbox.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  postImages.forEach(img => {
+    img.setAttribute('tabindex', '0');
+    img.addEventListener('click', () => openLightbox(img));
+    img.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openLightbox(img);
+      }
+    });
+  });
+
+  lightbox.addEventListener('click', e => {
+    if (e.target !== imgEl) closeLightbox();
+  });
+  closeBtn.addEventListener('click', closeLightbox);
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && lightbox.classList.contains('open')) closeLightbox();
+  });
+}
+
 
 /* ── SEARCH ── */
 // Resolve paths relative to the current page's depth
@@ -557,6 +617,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initReveal();
   initVisitorCounter();
   initBlogFilter();
+  initPostImageLightbox();
   
   initCLI();
   initSearch();

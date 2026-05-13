@@ -211,10 +211,10 @@ Building data products that turn numbers into decisions.</p>
       <div class="footer-col">
         <h4>Links</h4>
         <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="pages/blog.html">Blog</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="pages/cli.html">CLI</a></li>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="../index.html#projects">Projects</a></li>
+          <li><a href="cli.html">CLI</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -253,6 +253,7 @@ Building data products that turn numbers into decisions.</p>
   </button>
 </nav>
 
+<!-- SEARCH SHORTCUT -->
 <button class="search-float-btn" data-search-trigger title="Search (⌘K)">
   <svg viewBox="0 0 24 24"><path d="M21 21l-4.35-4.35M16.65 16.65A7.5 7.5 0 1 0 2 9.5a7.5 7.5 0 0 0 14.65 7.15z" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
   Search
@@ -277,17 +278,7 @@ Building data products that turn numbers into decisions.</p>
   </div>
 </div>
 
+<!-- SCRIPTS -->
 <script src="../js/main.js"></script>
-<script>
-  document.querySelectorAll('.filt-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      setTimeout(() => {
-        const visible = document.querySelectorAll('.blog-item:not([style*="display: none"])').length;
-        document.getElementById('post-count').textContent = visible;
-        document.getElementById('empty-state').style.display = visible === 0 ? 'block' : 'none';
-      }, 10);
-    });
-  });
-</script>
 </body>
 </html>
